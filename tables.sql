@@ -1,3 +1,5 @@
+/*ADD TABLES HERE*/
+
 CREATE TABLE DOCTOR(
 	doctor_ID INT NOT NULL,
     license_num INT NOT NULL,
@@ -14,8 +16,12 @@ CREATE TABLE DOCTOR(
 );
 
 
+
+
+
 /* Viewing portion
 
 SELECT * FROM DOCTOR 
 LEFT JOIN 
 */
+
