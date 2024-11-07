@@ -22,12 +22,15 @@ CREATE TABLE `consultations` (
   `consultationID` int(10) NOT NULL,
   `patientID` int(10) NOT NULL,
   `startDate` datetime NOT NULL,
+  `satisfactionRating` int(3) NOT NULL,
   `endDate` datetime NOT NULL,
   `reason` varchar(100) NOT NULL,
-  `doctorID` datetime NOT NULL,
+  `doctorID` int(10) NOT NULL,
   `notes` varchar(100) DEFAULT NULL,
+  `medicalHistory` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`consultationID`),
-  FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`)
+  FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`),
+  FOREIGN KEY(`doctorID`) REFERENCES `doctors` (`doctorID`)
   );
 
 DROP TABLE IF EXISTS `doctors`;
@@ -37,16 +40,16 @@ CREATE TABLE `doctors` (
   `doctorFirstName` varchar(50) NOT NULL,
   `departmentID` int(10) NOT NULL,
   `sex` varchar(1) NOT NULL,
+  `salary` int(10) NOT NULL, 
   `birthday` datetime NOT NULL,
   `phoneNumber` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
   `licenseNumber` varchar(50) NOT NULL,
   `field` varchar(50) NOT NULL,
   `specialization` varchar(50) NOT NULL,
-  `consultations` int(10) DEFAULT NULL,
   `workingHours` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`doctorID`),
-  FOREIGN KEY (`consultations`) REFERENCES `consultations` (`consultationID`)
+  
+  PRIMARY KEY (`doctorID`)
   );
   
 DROP TABLE IF EXISTS `departments`;
