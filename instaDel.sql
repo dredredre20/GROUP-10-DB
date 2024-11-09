@@ -1,3 +1,5 @@
+//commands for deleting purposes when testing populateData code again
+
 DELETE FROM address
 WHERE addressID = 1128301398;
 
