@@ -1,22 +1,12 @@
 CREATE DATABASE IF NOT EXISTS `HMO`;
 USE `HMO`;
-
-DROP TABLE IF EXISTS `address`;
-CREATE TABLE `address`(
-	`addressID` int(10) NOT NULL,
-    `streetAddress` varchar(50) NOT NULL, 
-    `city` varchar(50) NOT NULL, 
-    `province` varchar(50) NOT NULL, 
-    `postalCode` varchar(20) NOT NULL,
-    PRIMARY KEY(`addressID`)
-);
   
 DROP TABLE IF EXISTS `departments`;
 CREATE TABLE `departments` (
   `departmentID` int(10) NOT NULL,
   `departmentName` varchar(50) NOT NULL,
   `phoneNumber` varchar(50) NOT NULL,
-  `addressID` int(10) NOT NULL,
+  `address` varchar(150) NOT NULL,
   `email` varchar(50) NOT NULL,
   `capacity` int(3) NOT NULL,
   PRIMARY KEY (`departmentID`),
@@ -33,7 +23,7 @@ CREATE TABLE `doctors` (
   `salary` int(10) NOT NULL, 
   `birthday` datetime NOT NULL,
   `phoneNumber` varchar(50) NOT NULL,
-  `addressID` int(10) NOT NULL,
+  `address` varchar(150) NOT NULL,
   `licenseNumber` varchar(50) NOT NULL,
   `field` varchar(50) NOT NULL,
   `specialization` varchar(50) NOT NULL,
@@ -56,7 +46,7 @@ CREATE TABLE `patients` (
   `sex` varchar(1) NOT NULL,
   `birthday` datetime NOT NULL,
   `phoneNumber` varchar(50) NOT NULL,
-  `addressID` int(10) NOT NULL,
+  `address` varchar(150) NOT NULL,
   `contactPersonName` varchar(50) NOT NULL,
   `contactPersonNumber` varchar(50) NOT NULL,
   `bloodType` varchar(2) NOT NULL,
@@ -74,7 +64,8 @@ CREATE TABLE `consultations` (
   `endDate` datetime NOT NULL,
   `reason` varchar(100) NOT NULL,
   `doctorID` int(10) NOT NULL,
-  `notes` varchar(100) DEFAULT NULL,
+  `treatmentNote` varchar(200) DEFAULT NULL,
+  `medicinePrescription` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`consultationID`),
   FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`),
   FOREIGN KEY(`doctorID`) REFERENCES `doctors` (`doctorID`)
