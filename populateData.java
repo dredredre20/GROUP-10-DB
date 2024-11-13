@@ -6,7 +6,7 @@ public class populateData {
 
         String hmo_url = "jdbc:mysql://127.0.0.1:3306/hmo";
         String user = "root";
-        String pass = "hello_peak17+11";
+        String pass = "";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
