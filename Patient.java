@@ -11,7 +11,7 @@ class Patient {
 
     //initialize patient details
     public Patient(int patientID, String lastName, String firstName, String sex, String birthday, String contactNumber, String emergencyContactPerson, 
-        String emergencyContactNumber,String address, String bloodType, String allergies, String address, String streetAddress, String city,
+        String emergencyContactNumber,String address, String bloodType, String allergies, String streetAddress, String city,
         String province, String postalCode) {
         
         this.patientID = patientID;
