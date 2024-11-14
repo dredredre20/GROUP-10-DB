@@ -14,7 +14,7 @@ class departments {
         this.departmentID = departmentID;
         this.departmentName = departmentName;
         this.phoneNumber = phoneNumber;
-        this.address = address + streetAddress + city + province + postalCode;
+        this.address = streetAddress + city + province + postalCode;
         this.email = email;
         this.capacity = capacity;
     }
