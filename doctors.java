@@ -25,7 +25,7 @@ class doctors {
         this.salary = salary;
         this.birthday = birthday;
         this.phoneNumber = phoneNumber;
-        this.address = address + streetAddress + city + province + postalCode;
+        this.address = streetAddress + city + province + postalCode;
         this.licenseNumber = licenseNumber;
         this.field = field;
         this.specialization = specialization;
