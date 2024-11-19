@@ -25,6 +25,7 @@ public class View{
     private JButton	button4 = new JButton();
     private JButton 	button5 = new JButton();
     private JButton	button6 = new JButton();
+    private JButton	button7 = new JButton();
 
     private JTextField	textField1 = new JTextField();
     private JTextField	textField2 = new JTextField();
@@ -39,10 +40,17 @@ public class View{
     private JTextField	textField11 = new JTextField();
     private JTextField	textField12 = new JTextField();
     private JTextField	textField13 = new JTextField();
+    private JTextField	textField14 = new JTextField();
+    private JTextField	textField15 = new JTextField();
+    private JTextField	textField16 = new JTextField();
+    private JTextField	textField17 = new JTextField();
+    private JTextField	textField18 = new JTextField();
 
-    private JTextArea	textArea = new JTextArea(12, 48);
+    private JTextArea	textArea1 = new JTextArea(12, 48);
+    private JTextArea	textArea2 = new JTextArea(12, 48);
 
-    private JScrollPane	scrollPane = new JScrollPane(textArea);
+    private JScrollPane	scrollPane1 = new JScrollPane(textArea1);
+    private JScrollPane	scrollPane2 = new JScrollPane(textArea2);
 
     private JLabel	label1 = new JLabel();
     private JLabel	label2 = new JLabel();
@@ -59,6 +67,14 @@ public class View{
     private JLabel	label13 = new JLabel();
     private JLabel	label14 = new JLabel();
     private JLabel	label15 = new JLabel();
+    private JLabel	label16 = new JLabel();
+    private JLabel	label17 = new JLabel();
+    private JLabel	label18 = new JLabel();
+    private JLabel	label19 = new JLabel();
+    private JLabel	label20 = new JLabel();
+    private JLabel	label21 = new JLabel();
+    private JLabel	label22 = new JLabel();
+
 
     private JLabel 	result1 = new JLabel();
     private JLabel 	result2 = new JLabel();
@@ -86,7 +102,13 @@ public class View{
 	this.textField11.setColumns(10);
 	this.textField12.setColumns(10);
 	this.textField13.setColumns(10);
-	this.textArea.setEditable(false);
+	this.textField14.setColumns(10);
+	this.textField15.setColumns(10);
+	this.textField16.setColumns(10);
+	this.textField17.setColumns(10);
+	this.textField18.setColumns(10);
+	this.textArea1.setEditable(false);
+	this.textArea2.setEditable(false);
 	this.mainMenu();
 	this.frame.setVisible(true);
     }
@@ -168,6 +190,26 @@ public class View{
 	this.textField13.setText(text);
     }
 
+    public void setText14(String text) {
+	this.textField14.setText(text);
+    }
+
+    public void setText15(String text) {
+	this.textField15.setText(text);
+    }
+
+    public void setText16(String text) {
+	this.textField16.setText(text);
+    }
+
+    public void setText17(String text) {
+	this.textField17.setText(text);
+    }
+
+    public void setText18(String text) {
+	this.textField18.setText(text);
+    }
+
     public String getText1() {
 	return this.textField1.getText();
     }
@@ -220,8 +262,32 @@ public class View{
 	return this.textField13.getText();
     }
 
-    public void setTextArea(String text) {
-	this.textArea.setText(text);
+    public String getText14() {
+	return this.textField14.getText();
+    }
+
+    public String getText15() {
+	return this.textField15.getText();
+    }
+
+    public String getText16() {
+	return this.textField16.getText();
+    }
+
+    public String getText17() {
+	return this.textField17.getText();
+    }
+
+    public String getText18() {
+	return this.textField18.getText();
+    }
+
+    public void setTextArea1(String text) {
+	this.textArea1.setText(text);
+    }
+
+    public void setTextArea2(String text) {
+	this.textArea2.setText(text);
     }
 
     public void setResult1(String result) {
@@ -276,15 +342,19 @@ public class View{
 	this.button6.addActionListener(actionListener);
     }
 
+    public void setButton7(ActionListener actionListener) {
+	this.button7.addActionListener(actionListener);
+    }
+
     public void mainMenu() {
-	this.setMenu(000);
-	this.button1.setText("Appoint Patient Consultation"); 	//appoint
-	this.button2.setText("Update Patient Record");		//update
-	this.button2.setText("Update Consultation");  	      	//consult
-	this.button3.setText("Remove Unused/Dated Records");  	//remove
-	this.button4.setText("Assign Doctor to Department");  	//assign
-	this.button5.setText("Configure Department");         	//config
-	this.button6.setText("Generate Reports");             	//report
+	this.setMenu(0000);
+	this.button1.setText("Patient log-in/sign up"); 	//patient
+	this.button2.setText("Update Patient Record");		//pUpdate
+	this.button3.setText("Update Consultation");  	      	//consult
+	this.button4.setText("Remove Unused/Dated Records");  	//remove
+	this.button5.setText("Doctor log-in/sign-up");  	//doctor
+	this.button6.setText("Update References");		//refer
+	this.button7.setText("Generate Reports");             	//report
 
 	this.frame.add(this.button1);
 	this.frame.add(this.button2);
@@ -292,20 +362,21 @@ public class View{
 	this.frame.add(this.button4);
 	this.frame.add(this.button5);
 	this.frame.add(this.button6);
+	this.frame.add(this.button7);
     }
 
-    public void appoint() {
-	this.setMenu(100);
-	this.button1.setText("Appoint for outdated/new user");
-	this.button2.setText("Appoint for existing user");
+    public void patient() {
+	this.setMenu(1000);
+	this.button1.setText("Sign up");
+	this.button2.setText("Log-in with ID");
 
 	this.frame.add(back);
 	this.frame.add(button1);
 	this.frame.add(button2);
     }
 
-    public void appointNew() {
-	this.setMenu(110);
+    public void patientNew() {
+	this.setMenu(1100);
 	this.label1.setText("Input Patient Data");
 	this.label2.setText("Last Name: ");
 	this.label3.setText("First Name: ");
@@ -317,9 +388,11 @@ public class View{
 	this.label9.setText("City: ");
 	this.label10.setText("Province: ");
 	this.label11.setText("Postal Code: ");
-	this.label12.setText("Contact Person: ");
-	this.label13.setText("Contact Person's Phone Number: ");
-	this.label14.setText("Allergies: ");
+	this.label12.setText("Contact Person's Last Name: ");
+	this.label13.setText("Contact Person's First Name: ");
+	this.label14.setText("Contact Person's Phone Number: ");
+	this.label15.setText("Relationship with contact person: ");
+	this.label16.setText("Allergies: ");
 
 	this.radio1.setText("Male");
 	this.radio2.setText("Female");
@@ -344,27 +417,30 @@ public class View{
 	this.frame.add(label6);
 	this.frame.add(textField4);
 	this.frame.add(label7);
-	this.frame.add(textField5);
 	this.frame.add(label8);
-	this.frame.add(textField6);
+	this.frame.add(textField5);
 	this.frame.add(label9);
-	this.frame.add(textField7);
+	this.frame.add(textField6);
 	this.frame.add(label10);
-	this.frame.add(textField8);
+	this.frame.add(textField7);
 	this.frame.add(label11);
-	this.frame.add(textField9);
+	this.frame.add(textField8);
 	this.frame.add(label12);
-	this.frame.add(textField10);
+	this.frame.add(textField9);
 	this.frame.add(label13);
-	this.frame.add(textField11);
+	this.frame.add(textField10);
 	this.frame.add(label14);
+	this.frame.add(textField11);
+	this.frame.add(label15);
 	this.frame.add(textField12);
+	this.frame.add(label16);
+	this.frame.add(textField13);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
 
-    public void appointOld() {
-	this.setMenu(120);
+    public void patientOld() {
+	this.setMenu(1200);
 	this.label1.setText("Input patient ID: ");
 	this.label2.setText("List of patients: ");
 	
@@ -373,50 +449,71 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane);
+	this.frame.add(scrollPane1);
     }
 
-    public void appointPatient() {
-	this.setMenu(101);
-	this.label1.setText("Input available time (mm/dd/yyyy hh:mm): ");
-	this.label2.setText("From ");
-	this.label3.setText("To ");
-	this.label4.setText("List of available doctors: ");
-	this.label5.setText("Input doctor ID to select: ");
-	this.button1.setText("Book Consultation");
+    public void patientMenu() {
+	this.setMenu(1300);
+	this.button1.setText("Edit patient record");
+	this.button2.setText("Book Consultation");
+
+	this.frame.add(back);
+	this.frame.add(button1);
+	this.frame.add(button2);
+    }
+
+    public void patientMenuEdit() {
+	this.setMenu(1010);
+	this.button1.setText("Add contact person");
+	this.button2.setText("Remove contact person");
+	this.button3.setText("Edit patient information");
+
+	this.frame.add(back);
+	this.frame.add(button1);
+	this.frame.add(button2);
+	this.frame.add(button3);
+    }
+
+    public void patientMenuEditAddC() {
+	this.setMenu(1011);
+	this.label1.setText("Contact Person's Last Name: ");
+	this.label2.setText("Contact Person's First Name: ");
+	this.label3.setText("Contact Person's Phone Number: ");
+	this.label4.setText("Relationship with contact person: ");
 
 	this.frame.add(back);
 	this.frame.add(label1);
-	this.frame.add(label2);
 	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(textField2);
 	this.frame.add(label3);
+	this.frame.add(textField3);
+	this.frame.add(label4);
+	this.frame.add(textField4);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void patientMenuEditRemoveC() {
+	this.setMenu(1012);
+	this.label1.setText("Input contact person's last name: ");
+	this.label2.setText("Input contact person's first name: ");
+	this.label3.setText("List of contact persons: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
 	this.frame.add(textField2);
 	this.frame.add(confirm);
 	this.frame.add(result1);
-	this.frame.add(label4);
-	this.frame.add(scrollPane);
-	this.frame.add(label5);
-	this.frame.add(textField3);
-	this.frame.add(button1);
-	this.frame.add(result2);
+	this.frame.add(label3);
+	this.frame.add(scrollPane1);
     }
 
-    public void update() {
-	this.setMenu(200);
-	this.label1.setText("Input patient ID: ");
-	this.label2.setText("List of patients: ");
-	
-	this.frame.add(back);
-	this.frame.add(label1);
-	this.frame.add(confirm);
-	this.frame.add(result1);
-	this.frame.add(label2);
-	this.frame.add(scrollPane);
-    }
-					//the patient data is placed on the text fields by default
-    public void updatePatient() {
-	this.setMenu(210);
-	this.label1.setText("Input Patient Data to update");
+    public void patientMenuEditPatient() {
+	this.setMenu(1013);
+	this.label1.setText("Input Patient Data");
 	this.label2.setText("Last Name: ");
 	this.label3.setText("First Name: ");
 	this.label4.setText("Sex: ");
@@ -427,10 +524,12 @@ public class View{
 	this.label9.setText("City: ");
 	this.label10.setText("Province: ");
 	this.label11.setText("Postal Code: ");
-	this.label12.setText("Contact Person: ");
-	this.label13.setText("Contact Person's Phone Number: ");
-	this.label14.setText("Blood Type");
-	this.label15.setText("Allergies: ");
+	this.label12.setText("Contact Person's Last Name: ");
+	this.label13.setText("Contact Person's First Name: ");
+	this.label14.setText("Contact Person's Phone Number: ");
+	this.label15.setText("Relationship with contact person: ");
+	this.label16.setText("Blood type: ");
+	this.label17.setText("Allergies: ");
 
 	this.radio1.setText("Male");
 	this.radio2.setText("Female");
@@ -452,29 +551,140 @@ public class View{
 	this.frame.add(label6);
 	this.frame.add(textField4);
 	this.frame.add(label7);
-	this.frame.add(textField5);
 	this.frame.add(label8);
-	this.frame.add(textField6);
+	this.frame.add(textField5);
 	this.frame.add(label9);
-	this.frame.add(textField7);
+	this.frame.add(textField6);
 	this.frame.add(label10);
-	this.frame.add(textField8);
+	this.frame.add(textField7);
 	this.frame.add(label11);
-	this.frame.add(textField9);
+	this.frame.add(textField8);
 	this.frame.add(label12);
-	this.frame.add(textField10);
+	this.frame.add(textField9);
 	this.frame.add(label13);
-	this.frame.add(textField11);
+	this.frame.add(textField10);
 	this.frame.add(label14);
-	this.frame.add(textField12);
+	this.frame.add(textField11);
 	this.frame.add(label15);
+	this.frame.add(textField12);
+	this.frame.add(label16);
 	this.frame.add(textField13);
+	this.frame.add(label17);
+	this.frame.add(textField14);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void patientMenuConsult() {
+	this.setMenu(1020);
+	this.label1.setText("Input available time (mm/dd/yyyy hh:mm): ");
+	this.label2.setText("From ");
+	this.label3.setText("To ");
+	this.label4.setText("Input complaint (leave blank if not in list): ");
+	this.label5.setText("List of chief complaints: ");
+	this.label6.setText("Input doctor ID to select: ");
+	this.label7.setText("List of available doctors: ");
+	this.button1.setText("Book Consultation");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(textField2);
+	this.frame.add(label4);
+	this.frame.add(textField3);
+	this.frame.add(label5);
+	this.frame.add(scrollPane1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+	this.frame.add(label6);
+	this.frame.add(textField4);
+	this.frame.add(label7);
+	this.frame.add(scrollPane2);
+	this.frame.add(button1);
+	this.frame.add(result2);
+    }
+
+    public void pUpdate() {
+	this.setMenu(2000);
+	this.label1.setText("Input patient ID: ");
+	this.label2.setText("List of patients: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+    }
+					//the patient data is placed on the text fields by default
+    public void pUpdateData() {
+	this.setMenu(2100);
+	this.label1.setText("Input Patient Data");
+	this.label2.setText("Last Name: ");
+	this.label3.setText("First Name: ");
+	this.label4.setText("Sex: ");
+	this.label5.setText("Birthday (mm/dd/yyyy): ");
+	this.label6.setText("Phone Number: ");
+	this.label7.setText("Home Address: ");
+	this.label8.setText("Street: ");
+	this.label9.setText("City: ");
+	this.label10.setText("Province: ");
+	this.label11.setText("Postal Code: ");
+	this.label12.setText("Contact Person's Last Name: ");
+	this.label13.setText("Contact Person's First Name: ");
+	this.label14.setText("Contact Person's Phone Number: ");
+	this.label15.setText("Relationship with contact person: ");
+	this.label16.setText("Blood type: ");
+	this.label17.setText("Allergies: ");
+
+	this.radio1.setText("Male");
+	this.radio2.setText("Female");
+	this.bg.add(radio1);
+	this.bg.add(radio2);
+	this.radio1.setSelected(true);
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(textField2);
+	this.frame.add(label4);
+	this.frame.add(radio1);
+	this.frame.add(radio2);
+	this.frame.add(label5);
+	this.frame.add(textField3);
+	this.frame.add(label6);
+	this.frame.add(textField4);
+	this.frame.add(label7);
+	this.frame.add(label8);
+	this.frame.add(textField5);
+	this.frame.add(label9);
+	this.frame.add(textField6);
+	this.frame.add(label10);
+	this.frame.add(textField7);
+	this.frame.add(label11);
+	this.frame.add(textField8);
+	this.frame.add(label12);
+	this.frame.add(textField9);
+	this.frame.add(label13);
+	this.frame.add(textField10);
+	this.frame.add(label14);
+	this.frame.add(textField11);
+	this.frame.add(label15);
+	this.frame.add(textField12);
+	this.frame.add(label16);
+	this.frame.add(textField13);
+	this.frame.add(label17);
+	this.frame.add(textField14);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
 
     public void consult() {
-	this.setMenu(300);
+	this.setMenu(3000);
 	this.label1.setText("Input consultation ID");
 	this.label2.setText("List of consultations");
 	
@@ -484,14 +694,53 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane);
+	this.frame.add(scrollPane1);
     }
 					//can only update rating and notes
     public void consultUpdate() {
-	this.setMenu(310);
-	this.label1.setText("Update satisfaction rating: ");
-	this.label2.setText("Update notes: ");
+	this.setMenu(3100);
+	this.button1.setText("Update satisfaction rating");
+	this.button2.setText("Add laboratory request");
+	this.button3.setText("Add diagnosis");
+	this.button4.setText("Add prescription");
 	
+	this.frame.add(back);
+	this.frame.add(button1);
+	this.frame.add(button2);
+	this.frame.add(button3);
+	this.frame.add(button4);
+    }
+
+    public void consultUpdateRating() {
+	this.setMenu(3110);
+	this.label1.setText("Input satisfaction rating: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void consultUpdateLab() {
+	this.setMenu(3120);
+	this.label1.setText("Input laboratory ID to select: ");
+	this.label2.setText("List of laboratories");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void consultUpdateDia() {
+	this.setMenu(3130);
+	this.label1.setText("Input diagnosis description: ");
+	this.label2.setText("Input diagnosis severity: ");
+
 	this.frame.add(back);
 	this.frame.add(label1);
 	this.frame.add(textField1);
@@ -501,20 +750,58 @@ public class View{
 	this.frame.add(result1);
     }
 
+    public void consultUpdatePre() {
+	this.setMenu(3140);
+	this.label1.setText("Input medicine ID: ");
+	this.label2.setText("List of medicines: ");
+	this.label3.setText("Input dosage: ");
+	this.label4.setText("Input frequency: ");
+	this.label5.setText("Input start and end dates (mm/dd/yyyy): ");
+	this.label6.setText("From ");
+	this.label7.setText("To ");
+	this.label8.setText("Input notes: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+	this.frame.add(label3);
+	this.frame.add(textField2);
+	this.frame.add(label4);
+	this.frame.add(textField3);
+	this.frame.add(label5);
+	this.frame.add(label6);
+	this.frame.add(textField4);
+	this.frame.add(label7);
+	this.frame.add(textField5);
+	this.frame.add(label8);
+	this.frame.add(textField6);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
     public void remove() {
-	this.setMenu(400);
+	this.setMenu(4000);
 	this.button1.setText("Remove patient records");
 	this.button2.setText("Remove consultation records");
 	this.button3.setText("Remove doctor records");
+	this.button4.setText("Remove laboratory records");
+	this.button5.setText("Remove chief complaints records");
+	this.button6.setText("Remove medicine records");
+		
 
 	this.frame.add(back);
 	this.frame.add(button1);
 	this.frame.add(button2);
 	this.frame.add(button3);
+	this.frame.add(button4);
+	this.frame.add(button5);
+	this.frame.add(button6);
     }
 
     public void removePatient() {
-	this.setMenu(410);
+	this.setMenu(4100);
 	this.label1.setText("Input patient ID");
 	this.label2.setText("List of patients");
 	
@@ -524,11 +811,11 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane);
+	this.frame.add(scrollPane1);
     }
 
     public void removeConsult() {
-	this.setMenu(420);
+	this.setMenu(4200);
 	this.label1.setText("Input consultation ID");
 	this.label2.setText("List of consultations");
 	
@@ -538,11 +825,11 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane);
+	this.frame.add(scrollPane1);
     }
 
     public void removeDoctor() {
-	this.setMenu(430);
+	this.setMenu(4300);
 	this.label1.setText("Input doctor ID");
 	this.label2.setText("List of doctors");
 	
@@ -552,11 +839,142 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane);
+	this.frame.add(scrollPane1);
     }
 
-    public void assign() {
-	this.setMenu(500);
+    public void removeLab() {
+	this.setMenu(4400);
+	this.label1.setText("Input laboratory ID");
+	this.label2.setText("List of laboratories");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+    }
+
+    public void removeComplaint() {
+	this.setMenu(4500);
+	this.label1.setText("Input chief complaint description");
+	this.label2.setText("List of chief complaints");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+    }
+
+    public void removeMedicine() {
+	this.setMenu(4600);
+	this.label1.setText("Input medicine ID");
+	this.label2.setText("List of medicines");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+    }
+
+    public void doctor() {
+	this.setMenu(5000);
+	this.button1.setText("Sign up");
+	this.button2.setText("Log-in with ID");
+
+	this.frame.add(back);
+	this.frame.add(button1);
+	this.frame.add(button2);
+    }
+
+    public void doctorNew() {
+	this.setMenu(5100);
+	this.label1.setText("Input Doctor Data");
+	this.label2.setText("Last Name: ");
+	this.label3.setText("First Name: ");
+	this.label4.setText("Sex: ");
+	this.label5.setText("Birthday (mm/dd/yyyy): ");
+	this.label6.setText("Phone Number: ");
+	this.label7.setText("Home Address: ");
+	this.label8.setText("Street: ");
+	this.label9.setText("City: ");
+	this.label10.setText("Province: ");
+	this.label11.setText("Postal Code: ");
+	this.label12.setText("Email: ");
+	this.label13.setText("Salary: ");
+	this.label14.setText("License Number: ");
+	this.label15.setText("Working Hours (hh:mm) (24h format): ");
+	this.label16.setText("From: ");
+	this.label17.setText("To");
+	this.label18.setText("Max Patient Load: ");
+	this.label19.setText("Specialization: ");
+	this.label20.setText("Specialization Field: ");
+	this.label21.setText("Specialization Certificate Date (mm/dd/yyyy): ");
+	this.label22.setText("Specialization Expiry Date (mm/dd/yyyy): ");
+
+
+	this.radio1.setText("Male");
+	this.radio2.setText("Female");
+	this.bg.add(radio1);
+	this.bg.add(radio2);
+	this.radio1.setSelected(true);
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(textField2);
+	this.frame.add(label4);
+	this.frame.add(radio1);
+	this.frame.add(radio2);
+	this.frame.add(label5);
+	this.frame.add(textField3);
+	this.frame.add(label6);
+	this.frame.add(textField4);
+	this.frame.add(label7);
+	this.frame.add(label8);
+	this.frame.add(textField5);
+	this.frame.add(label9);
+	this.frame.add(textField6);
+	this.frame.add(label10);
+	this.frame.add(textField7);
+	this.frame.add(label11);
+	this.frame.add(textField8);
+	this.frame.add(label12);
+	this.frame.add(textField9);
+	this.frame.add(label13);
+	this.frame.add(textField10);
+	this.frame.add(label14);
+	this.frame.add(textField11);
+	this.frame.add(label15);
+	this.frame.add(label16);
+	this.frame.add(textField12);
+	this.frame.add(label17);
+	this.frame.add(textField13);
+	this.frame.add(label18);
+	this.frame.add(textField14);
+	this.frame.add(label19);
+	this.frame.add(textField15);
+	this.frame.add(label20);
+	this.frame.add(textField16);
+	this.frame.add(label21);
+	this.frame.add(textField17);
+	this.frame.add(label22);
+	this.frame.add(textField18);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void doctorOld() {
+	this.setMenu(5200);
 	this.label1.setText("Input doctor ID to select");
 	this.label2.setText("List of doctors");
 	
@@ -566,48 +984,27 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane);
+	this.frame.add(scrollPane1);
     }
 
-    public void assignDep() {
-	this.setMenu(510);
-	this.label1.setText("Input department ID to assign doctor to");
-	this.label2.setText("List of departments");
-	
-	this.frame.add(back);
-	this.frame.add(label1);
-	this.frame.add(textField1);
-	this.frame.add(confirm);
-	this.frame.add(result1);
-	this.frame.add(label2);
-	this.frame.add(scrollPane);
-    }
-
-    public void config() {
-	this.setMenu(600);
-	this.label1.setText("Input department ID to configure");
-	this.label2.setText("List of departments");
+    public void doctorMenu() {
+	this.setMenu(5300);
+	this.button1.setText("Add specializations");
+	this.button2.setText("Remove specialization");
+	this.button3.setText("Edit doctor record");
 
 	this.frame.add(back);
-	this.frame.add(label1);
-	this.frame.add(textField1);
-	this.frame.add(confirm);
-	this.frame.add(result1);
-	this.frame.add(label2);
-	this.frame.add(scrollPane);
+	this.frame.add(button1);
+	this.frame.add(button2);
+	this.frame.add(button3);
     }
 
-    public void configDep() {
-	this.setMenu(610);
-	this.label1.setText("Department name: ");
-	this.label2.setText("Phone Number: ");
-	this.label3.setText("Address: ");
-	this.label4.setText("Street: ");
-	this.label5.setText("City: ");
-	this.label6.setText("Province: ");
-	this.label7.setText("Postal Code: ");
-	this.label8.setText("Email: ");
-	this.label9.setText("Capacity: ");
+    public void doctorMenuAdd() {
+	this.setMenu(5010);
+	this.label1.setText("Specialization: ");
+	this.label2.setText("Specialization Field: ");
+	this.label3.setText("Specialization Certificate Date (mm/dd/yyyy): ");
+	this.label4.setText("Specialization Expiry Date (mm/dd/yyyy): ");
 
 	this.frame.add(back);
 	this.frame.add(label1);
@@ -618,22 +1015,298 @@ public class View{
 	this.frame.add(textField3);
 	this.frame.add(label4);
 	this.frame.add(textField4);
-	this.frame.add(label5);
-	this.frame.add(textField5);
-	this.frame.add(label6);
-	this.frame.add(textField6);
-	this.frame.add(label7);
-	this.frame.add(textField7);
-	this.frame.add(label8);
-	this.frame.add(textField8);
-	this.frame.add(label9);
-	this.frame.add(textField9);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
 
+    public void doctorMenuRemove() {
+	this.setMenu(5020);
+	this.label1.setText("Input specialization to remove: ");
+	this.label2.setText("List of specializations: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void doctorMenuEdit() {
+	this.setMenu(5030);
+	this.label1.setText("Input Doctor Data");
+	this.label2.setText("Last Name: ");
+	this.label3.setText("First Name: ");
+	this.label4.setText("Sex: ");
+	this.label5.setText("Birthday (mm/dd/yyyy): ");
+	this.label6.setText("Phone Number: ");
+	this.label7.setText("Home Address: ");
+	this.label8.setText("Street: ");
+	this.label9.setText("City: ");
+	this.label10.setText("Province: ");
+	this.label11.setText("Postal Code: ");
+	this.label12.setText("Email: ");
+	this.label13.setText("Salary: ");
+	this.label14.setText("License Number: ");
+	this.label15.setText("Working Hours (hh:mm) (24h format): ");
+	this.label16.setText("From: ");
+	this.label17.setText("To");
+	this.label18.setText("Max Patient Load: ");
+
+	this.radio1.setText("Male");
+	this.radio2.setText("Female");
+	this.bg.add(radio1);
+	this.bg.add(radio2);
+	this.radio1.setSelected(true);
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(textField2);
+	this.frame.add(label4);
+	this.frame.add(radio1);
+	this.frame.add(radio2);
+	this.frame.add(label5);
+	this.frame.add(textField3);
+	this.frame.add(label6);
+	this.frame.add(textField4);
+	this.frame.add(label7);
+	this.frame.add(label8);
+	this.frame.add(textField5);
+	this.frame.add(label9);
+	this.frame.add(textField6);
+	this.frame.add(label10);
+	this.frame.add(textField7);
+	this.frame.add(label11);
+	this.frame.add(textField8);
+	this.frame.add(label12);
+	this.frame.add(textField9);
+	this.frame.add(label13);
+	this.frame.add(textField10);
+	this.frame.add(label14);
+	this.frame.add(textField11);
+	this.frame.add(label15);
+	this.frame.add(label16);
+	this.frame.add(textField12);
+	this.frame.add(label17);
+	this.frame.add(textField13);
+	this.frame.add(label18);
+	this.frame.add(textField14);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void refer() {
+	this.setMenu(6000);
+	this.button1.setText("Add laboratory");
+	this.button2.setText("Edit laboratory");
+	this.button3.setText("Add chief complaint");
+	this.button4.setText("Edit chief complaint");
+	this.button5.setText("Add medicine");
+	this.button6.setText("Edit medicine");
+
+	this.frame.add(back);
+	this.frame.add(button1);
+	this.frame.add(button2);
+	this.frame.add(button3);
+	this.frame.add(button4);
+	this.frame.add(button5);
+	this.frame.add(button6);
+    }
+
+    public void referLabAdd() {
+	this.setMenu(6100);
+	this.label1.setText("Input laboratory data: ");
+	this.label2.setText("Laboratory name: ");
+	this.label3.setText("Home Address: ");
+	this.label4.setText("Street: ");
+	this.label5.setText("City: ");
+	this.label6.setText("Province: ");
+	this.label7.setText("Postal Code: ");
+	this.label8.setText("Phone Number: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(label4);
+	this.frame.add(textField2);
+	this.frame.add(label5);
+	this.frame.add(textField3);
+	this.frame.add(label6);
+	this.frame.add(textField4);
+	this.frame.add(label7);
+	this.frame.add(textField5);
+	this.frame.add(label8);
+	this.frame.add(textField6);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void referLabEdit() {
+	this.setMenu(6200);
+	this.label1.setText("Input laboratory ID: ");
+	this.label2.setText("List of laboratories: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void referLabEditData() {
+	this.setMenu(6210);
+	this.label1.setText("Edit laboratory data: ");
+	this.label2.setText("Laboratory name: ");
+	this.label3.setText("Home Address: ");
+	this.label4.setText("Street: ");
+	this.label5.setText("City: ");
+	this.label6.setText("Province: ");
+	this.label7.setText("Postal Code: ");
+	this.label8.setText("Phone Number: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(label4);
+	this.frame.add(textField2);
+	this.frame.add(label5);
+	this.frame.add(textField3);
+	this.frame.add(label6);
+	this.frame.add(textField4);
+	this.frame.add(label7);
+	this.frame.add(textField5);
+	this.frame.add(label8);
+	this.frame.add(textField6);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void referComp() {
+	this.setMenu(6300);
+	this.label1.setText("Input chief complaint data: ");
+	this.label2.setText("Description: ");
+	this.label3.setText("Category: ");
+	this.label4.setText("Recommended Specialization: ");
+	this.label5.setText("List of specializations: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(textField2);
+	this.frame.add(label4);
+	this.frame.add(textField3);
+	this.frame.add(label5);
+	this.frame.add(scrollPane1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void referCompEdit() {
+	this.setMenu(6400);
+	this.label1.setText("Input chief complaint description: ");
+	this.label2.setText("List of chief complaints: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void referCompEditData() {
+	this.setMenu(6410);
+	this.label1.setText("Edit chief complaint data: ");
+	this.label2.setText("Description: ");
+	this.label3.setText("Category: ");
+	this.label4.setText("Recommended Specialization: ");
+	this.label5.setText("List of specializations: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(textField2);
+	this.frame.add(label4);
+	this.frame.add(textField3);
+	this.frame.add(label5);
+	this.frame.add(scrollPane1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void referMed() {
+	this.setMenu(6500);
+	this.label1.setText("Input medicine data: ");
+	this.label2.setText("Brand name: ");
+	this.label3.setText("Common name: ");
+	this.label4.setText("Quantity: ");
+	this.label5.setText("Availability: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(textField2);
+	this.frame.add(label4);
+	this.frame.add(textField3);
+	this.frame.add(label5);
+	this.frame.add(textField4);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void referMedEdit() {
+	this.setMenu(6600);
+	this.label1.setText("Input medicine ID: ");
+	this.label2.setText("List of chief complaints: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane1);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void referMedEditData() {
+	this.setMenu(6610);
+	this.label1.setText("Edit medicine data: ");
+	this.label2.setText("Brand name: ");
+	this.label3.setText("Common name: ");
+	this.label4.setText("Quantity: ");
+	this.label5.setText("Availability: ");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(textField2);
+	this.frame.add(label4);
+	this.frame.add(textField3);
+	this.frame.add(label5);
+	this.frame.add(textField4);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+
     public void report() {
-	this.setMenu(700);
+	this.setMenu(7000);
 	this.label1.setText("Generate monthly/yearly reports");
 	this.button1.setText("HMO Consultations Report");
 	this.button2.setText("Department Performance Evaluation Report");
@@ -646,6 +1319,6 @@ public class View{
 	this.frame.add(button3);
 	this.frame.add(button4);
 	this.frame.add(result1);
-	this.frame.add(scrollPane);
+	this.frame.add(scrollPane1);
     }
 }
