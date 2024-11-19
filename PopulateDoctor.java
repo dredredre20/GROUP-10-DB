@@ -1,7 +1,8 @@
 import java.sql.*;
 
 public class PopulateDoctor {
-    public static void main(String[] args){
+    
+    public void doctor(){
         
         String hmo_url = "jdbc:mysql://127.0.0.1:3306/hmo";
         String user = "root";
