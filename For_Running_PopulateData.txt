@@ -1,0 +1,28 @@
+Running the Populate Data Table Files: 
+
+ALWAYS IN ORDER OF THIS:
+
+Compile each one then run (In Order): 
+javac -cp "mysql-connector-j-9.1.0.jar" PopulateDoctor.java
+java -cp "mysql-connector-j-9.1.0.jar" PopulateDoctor.java
+
+javac -cp "mysql-connector-j-9.1.0.jar" PopulatePatient.java
+java -cp "mysql-connector-j-9.1.0.jar" PopulatePatient.java
+
+javac -cp "mysql-connector-j-9.1.0.jar" PopulateConsul1.java
+java -cp "mysql-connector-j-9.1.0.jar" PopulateConsul1.java
+
+javac -cp "mysql-connector-j-9.1.0.jar" PopulateConsul2.java
+java -cp "mysql-connector-j-9.1.0.jar" PopulateConsul2.java
+
+
+
+
+ALTERNATIVE, compile all java files then run one-by-one:
+
+javac -cp ".;mysql-connector-j-9.1.0.jar" *.java
+
+java -cp "mysql-connector-j-9.1.0.jar" PopulateDoctor.java
+java -cp "mysql-connector-j-9.1.0.jar" PopulatePatient.java
+java -cp "mysql-connector-j-9.1.0.jar" PopulateConsul1.java
+java -cp "mysql-connector-j-9.1.0.jar" PopulateConsul2.java
