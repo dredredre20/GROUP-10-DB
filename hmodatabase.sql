@@ -4,7 +4,7 @@ USE `HMO`;
   
 DROP TABLE IF EXISTS `doctors`;
 CREATE TABLE `doctors` (
-  `doctorID` int(10) NOT NULL,
+  `doctorID` int(10) NOT NULL AUTO_INCREMENT,
   `lastName` varchar(50) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `sex` varchar(1) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `doctorSpecializations`(
 
 DROP TABLE IF EXISTS `patients`;
 CREATE TABLE `patients` (
-  `patientID` int(10) NOT NULL,
+  `patientID` int(10) NOT NULL AUTO_INCREMENT,
   `patientLastName` varchar(50) NOT NULL,
   `patientFirstName` varchar(50) NOT NULL,
   `sex` varchar(1) NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE `consultations` (
   
 DROP TABLE IF EXISTS `laboratory`;
   CREATE TABLE `laboratory`(
-	`laboratoryID` int(10) NOT NULL,
+	`laboratoryID` int(10) NOT NULL AUTO_INCREMENT,
 	`name` varchar(100),
 	`address` varchar(100),
 	`phoneNumber` varchar(50),
@@ -126,7 +126,7 @@ DROP TABLE IF EXISTS `complaints`;
   
 DROP TABLE IF EXISTS `medicine`;
   CREATE TABLE `medicine`(
-	`medicineID` int(10) NOT NULL,
+	`medicineID` int(10) NOT NULL AUTO_INCREMENT,
 	`brandName` varchar(50), 
 	`commonName` varchar(50), 
 	`quantity` int(3), 
