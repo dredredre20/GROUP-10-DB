@@ -10,7 +10,8 @@ public class Driver {
             // Then initialize MVC components
             View view = new View();
             Model model = new Model();
-            Controller controller = new Controller(view, model);
+	        Transactions transactions = new Transactions("jdbc:mysql://127.0.0.1:3306/hmo", "root", "password");
+            Controller controller = new Controller(view, model, transactions);
             
         } catch (ClassNotFoundException e) {
             System.err.println("MySQL JDBC Driver not found.");
