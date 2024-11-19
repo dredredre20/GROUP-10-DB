@@ -58,7 +58,7 @@ CREATE TABLE `patients` (
 	`firstName` varchar(50) NOT NULL, 
     `lastName` varchar(50) NOT NULL, 
     `phoneNumber` varchar(50) NOT NULL,
-    `relationship` varchar(50) NOT NULL,
+    `relationship` varchar(50) DEFAULT NULL,
 	PRIMARY KEY (`patientID`),
     FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`)
   );
@@ -66,13 +66,13 @@ CREATE TABLE `patients` (
   
 DROP TABLE IF EXISTS `consultations`;
 CREATE TABLE `consultations` (
-  `consultationID` int(10) NOT NULL,
+  `consultationID` int(10) NOT NULL AUTO_INCREMENT,
   `patientID` int(10) NOT NULL,
   `doctorID` int(10) NOT NULL,
-  `consultationDate` datetime NOT NULL,
-  `satisfactionRating` int(3) NOT NULL,
-  `startDate` datetime NOT NULL,
-  `endDate` datetime NOT NULL,
+  `consultationDate` datetime DEFAULT NULL,
+  `satisfactionRating` int(3) DEFAULT NULL,
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL,
   PRIMARY KEY (`consultationID`),
   FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`),
   FOREIGN KEY(`doctorID`) REFERENCES `doctors` (`doctorID`)
@@ -81,17 +81,17 @@ CREATE TABLE `consultations` (
 DROP TABLE IF EXISTS `laboratory`;
   CREATE TABLE `laboratory`(
 	`laboratoryID` int(10) NOT NULL AUTO_INCREMENT,
-	`name` varchar(100),
-	`address` varchar(100),
-	`phoneNumber` varchar(50),
+	`name` varchar(100) NOT NULL,
+	`address` varchar(100) NOT NULL,
+	`phoneNumber` varchar(50) NOT NULL,
 	PRIMARY KEY (`laboratoryID`)
   );
   
   DROP TABLE IF EXISTS `labRequest`;
   CREATE TABLE `labRequest`(
-	`laboratoryID` int(10),
-	`consultationID` int(10),
-	`issuedBy` int(10),
+	`laboratoryID` int(10) NOT NULL,
+	`consultationID` int(10) NOT NULL,
+	`issuedBy` int(10) NOT NULL,
     PRIMARY KEY (`laboratoryID`, `consultationID`),
     FOREIGN KEY (`laboratoryID`) REFERENCES `laboratory` (`laboratoryID`),
     FOREIGN KEY(`issuedBy`) REFERENCES `doctors` (`doctorID`), 
@@ -100,8 +100,8 @@ DROP TABLE IF EXISTS `laboratory`;
   
 DROP TABLE IF EXISTS `complaints`;
   CREATE TABLE `complaints`(
-	`complaintDescription` varchar(50),
-	`recommendedSpecialization` varchar(100),
+	`complaintDescription` varchar(50) NOT NULL,
+	`recommendedSpecialization` varchar(100) NOT NULL,
 	PRIMARY KEY (`complaintDescription`)
   );
   
@@ -118,8 +118,8 @@ DROP TABLE IF EXISTS `complaints`;
   DROP TABLE IF EXISTS `diagnosis`;
   CREATE TABLE `diagnosis` (
 	`consultationID` int(10) NOT NULL,
-	`diagnosisDescription` varchar(100),
-	`severity` varchar(50),
+	`diagnosisDescription` varchar(100) NOT NULL,
+	`severity` varchar(50) NOT NULL,
 	PRIMARY KEY (`consultationID`, `diagnosisDescription`),
 	FOREIGN KEY (`consultationID`) REFERENCES `consultations` (`consultationID`)
   );
@@ -127,10 +127,10 @@ DROP TABLE IF EXISTS `complaints`;
 DROP TABLE IF EXISTS `medicine`;
   CREATE TABLE `medicine`(
 	`medicineID` int(10) NOT NULL AUTO_INCREMENT,
-	`brandName` varchar(50), 
-	`commonName` varchar(50), 
-	`quantity` int(3), 
-	`availability` int(3),
+	`brandName` varchar(50) NOT NULL, 
+	`commonName` varchar(50) NOT NULL, 
+	`quantity` int(3) DEFAULT NULL, 
+	`availability` int(3) DEFAULT NULL,
     PRIMARY KEY(`medicineID`)
   );
   
@@ -139,10 +139,10 @@ DROP TABLE IF EXISTS `medicine`;
 	`medicineID` int(10) NOT NULL,
     `consultationID` int(10) NOT NULL,
     `dosage` varchar(50) NOT NULL, 
-    `frequency` varchar(50) NOT NULL, 
-    `startDate` date, 
-	`endDate` date, 
-	`notes` varchar(100), 
+    `frequency` varchar(50) DEFAULT NULL, 
+    `startDate` date DEFAULT NULL, 
+	`endDate` date DEFAULT NULL, 
+	`notes` varchar(100) DEFAULT NULL, 
     PRIMARY KEY (`medicineID`, `consultationID`), 
 	FOREIGN KEY (`consultationID`) REFERENCES `consultations` (`consultationID`),
 	FOREIGN KEY (`medicineID`) REFERENCES `medicine` (`medicineID`)
