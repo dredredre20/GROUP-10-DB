@@ -88,7 +88,7 @@ public class View{
 	this.frame = new JFrame("HMO Consultation Database");
 	this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	this.frame.setLayout(new FlowLayout());
-	this.frame.setSize(700, 300);
+	this.frame.setSize(1280, 720);
 	this.textField1.setColumns(10);
 	this.textField2.setColumns(10);
 	this.textField3.setColumns(10);
@@ -973,7 +973,7 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void doctorOld() {
+    public void doctorOld(JScrollPane scrollPane) {
 	this.setMenu(5200);
 	this.label1.setText("Input doctor ID to select");
 	this.label2.setText("List of doctors");
@@ -984,7 +984,7 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 
     public void doctorMenu() {
