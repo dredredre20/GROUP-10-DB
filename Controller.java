@@ -1,17 +1,24 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;  
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Controller{
     private View view;
     private Model model;
+    private Transactions transactions;
 
     public View getView() {
 	return this.view;
     }
 
-    public Controller(View view, Model model) {
+    public Controller(View view, Model model, Transactions transactions) {
 	this.view = view;
 	this.model = model;
+	this.transactions = transactions;
 
 	this.getView().setBack(new ActionListener() {
 	    @Override
@@ -96,6 +103,11 @@ public class Controller{
 	this.getView().setConfirm(new ActionListener() {
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
+
+		String gender = "";
+		DateTimeFormatter mdy = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+	    	
+
 		switch(view.getMenu()) {
 		    case 1100: 
 		    case 1011:
@@ -114,6 +126,12 @@ public class Controller{
 		    case 4500:
 		    case 4600:
 		    case 5100:
+			if (view.isButtonSelected(view.getRadio1())) {
+			    gender = "Male";
+			} else {
+			    gender = "Female";
+			}
+			transactions.addDoctor(view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5() + " " + view.getText6() + view.getText7() + " " + view.getText8(), view.getText9());
 		    case 5010:
 		    case 5020:
 		    case 5030:
@@ -310,7 +328,7 @@ public class Controller{
 		    case 5000:
 			view.refresh();
 			view.setResult1("");
-		    	view.doctorOld();
+		    	view.doctorOld(transactions.viewDoctor());
 			view.setVisible();
 			break;
 
