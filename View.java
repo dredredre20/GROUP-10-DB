@@ -462,17 +462,18 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void patientOld() {
+    public void patientOld(JScrollPane scrollPane) {
 	this.setMenu(1200);
 	this.label1.setText("Input patient ID: ");
 	this.label2.setText("List of patients: ");
 	
 	this.frame.add(back);
 	this.frame.add(label1);
+	this.frame.add(textField1);
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 
     public void patientMenu() {
@@ -629,17 +630,18 @@ public class View{
 	this.frame.add(result2);
     }
 
-    public void pUpdate() {
+    public void pUpdate(JScrollPane scrollPane) {
 	this.setMenu(2000);
 	this.label1.setText("Input patient ID: ");
 	this.label2.setText("List of patients: ");
 	
 	this.frame.add(back);
 	this.frame.add(label1);
+	this.frame.add(textField1);
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 					//the patient data is placed on the text fields by default
     public void pUpdateData() {
@@ -706,7 +708,7 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void consult() {
+    public void consult(JScrollPane scrollPane) {
 	this.setMenu(3000);
 	this.label1.setText("Input consultation ID");
 	this.label2.setText("List of consultations");
@@ -717,21 +719,27 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 					//can only update rating and notes
     public void consultUpdate() {
 	this.setMenu(3100);
 	this.button1.setText("Update satisfaction rating");
 	this.button2.setText("Add laboratory request");
-	this.button3.setText("Add diagnosis");
-	this.button4.setText("Add prescription");
+	this.button3.setText("Remove laboratory request");
+	this.button4.setText("Add diagnosis");
+	this.button5.setText("Remove diagnosis");
+	this.button6.setText("Add prescription");
+	this.button7.setText("Remove prescription");
 	
 	this.frame.add(back);
 	this.frame.add(button1);
 	this.frame.add(button2);
 	this.frame.add(button3);
 	this.frame.add(button4);
+	this.frame.add(button5);
+	this.frame.add(button6);
+	this.frame.add(button7);
     }
 
     public void consultUpdateRating() {
@@ -745,7 +753,7 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void consultUpdateLab() {
+    public void consultUpdateLab(JScrollPane scrollPane) {
 	this.setMenu(3120);
 	this.label1.setText("Input laboratory ID to select: ");
 	this.label2.setText("List of laboratories");
@@ -754,13 +762,27 @@ public class View{
 	this.frame.add(label1);
 	this.frame.add(textField1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void consultRemoveLab(JScrollPane scrollPane) {
+	this.setMenu(3130);
+	this.label1.setText("Input laboratory ID to select: ");
+	this.label2.setText("List of laboratories");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
 
     public void consultUpdateDia() {
-	this.setMenu(3130);
+	this.setMenu(3140);
 	this.label1.setText("Input diagnosis description: ");
 	this.label2.setText("Input diagnosis severity: ");
 
@@ -773,8 +795,22 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void consultUpdatePre() {
-	this.setMenu(3140);
+    public void consultRemoveDia(JScrollPane scrollPane) {
+	this.setMenu(3150);
+	this.label1.setText("Input diagnosis description to select: ");
+	this.label2.setText("List of diagnoses");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void consultUpdatePre(JScrollPane scrollPane) {
+	this.setMenu(3160);
 	this.label1.setText("Input medicine ID: ");
 	this.label2.setText("List of medicines: ");
 	this.label3.setText("Input dosage: ");
@@ -788,7 +824,7 @@ public class View{
 	this.frame.add(label1);
 	this.frame.add(textField1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
 	this.frame.add(label3);
 	this.frame.add(textField2);
 	this.frame.add(label4);
@@ -800,6 +836,20 @@ public class View{
 	this.frame.add(textField5);
 	this.frame.add(label8);
 	this.frame.add(textField6);
+	this.frame.add(confirm);
+	this.frame.add(result1);
+    }
+
+    public void consultRemovePre(JScrollPane scrollPane) {
+	this.setMenu(3170);
+	this.label1.setText("Input medicine ID to select: ");
+	this.label2.setText("List of medicines");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(scrollPane);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
@@ -823,7 +873,7 @@ public class View{
 	this.frame.add(button6);
     }
 
-    public void removePatient() {
+    public void removePatient(JScrollPane scrollPane) {
 	this.setMenu(4100);
 	this.label1.setText("Input patient ID");
 	this.label2.setText("List of patients");
@@ -834,10 +884,10 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 
-    public void removeConsult() {
+    public void removeConsult(JScrollPane scrollPane) {
 	this.setMenu(4200);
 	this.label1.setText("Input consultation ID");
 	this.label2.setText("List of consultations");
@@ -848,10 +898,10 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 
-    public void removeDoctor() {
+    public void removeDoctor(JScrollPane scrollPane) {
 	this.setMenu(4300);
 	this.label1.setText("Input doctor ID");
 	this.label2.setText("List of doctors");
@@ -862,10 +912,10 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 
-    public void removeLab() {
+    public void removeLab(JScrollPane scrollPane) {
 	this.setMenu(4400);
 	this.label1.setText("Input laboratory ID");
 	this.label2.setText("List of laboratories");
@@ -876,10 +926,10 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 
-    public void removeComplaint() {
+    public void removeComplaint(JScrollPane scrollPane) {
 	this.setMenu(4500);
 	this.label1.setText("Input chief complaint description");
 	this.label2.setText("List of chief complaints");
@@ -890,10 +940,10 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 
-    public void removeMedicine() {
+    public void removeMedicine(JScrollPane scrollPane) {
 	this.setMenu(4600);
 	this.label1.setText("Input medicine ID");
 	this.label2.setText("List of medicines");
@@ -904,7 +954,7 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 
     public void doctor() {
