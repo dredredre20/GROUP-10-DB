@@ -35,7 +35,7 @@ CREATE TABLE `doctorSpecializations`(
 	`field` varchar(50) NOT NULL,
     `certificateDate` date NOT NULL,
     `expiryDate` date NOT NULL,
-    PRIMARY KEY (`doctorID`),
+    PRIMARY KEY (`doctorID`, `name`),
     FOREIGN KEY (`doctorID`) REFERENCES `doctors` (`doctorID`)
 );
   
