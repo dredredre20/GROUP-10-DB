@@ -46,11 +46,11 @@ public class PopulateDoctor {
             //doctor work information
             Object[][] doctorWork = {
                 //example data
-                {123, 189000, "201-2101-0012", "12:00PM-18:00PM", 35, 14}
+                {123, 189000, "201-2101-0012", 1200, 1800, 35, 14}
             };  
 
-            String query1 = "INSERT INTO doctorWorkInfo (doctorID, salary, licenseNumber, workingHours, maxPatientLoad, currentPatientLoad)" +
-                            "VALUES (?, ?, ?, ?, ?, ?)";
+            String query1 = "INSERT INTO doctorWorkInfo (doctorID, salary, licenseNumber, workingStart, workingEnd, maxPatientLoad, currentPatientLoad)" +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement insert1 = connect.prepareStatement(query1);
 
@@ -58,9 +58,10 @@ public class PopulateDoctor {
                     insert1.setInt(1, (int) i[0]); //doctorID
                     insert1.setInt(2, (int) i[1]); //salary
                     insert1.setString(3, (String) i[2]); //license number
-                    insert1.setString(4, (String) i[3]); //working hours
-                    insert1.setInt(5, (int) i[4]); //max patient load
-                    insert1.setInt(6, (int) i[5]); //current patient load
+                    insert1.setString(4, (int) i[3]); //working start
+                    insert1.setString(5, (int) i[3]); //working end
+                    insert1.setInt(6, (int) i[4]); //max patient load
+                    insert1.setInt(7, (int) i[5]); //current patient load
 
                     insert1.executeUpdate();
                 }
