@@ -72,7 +72,7 @@ public class Transactions {
 	return 0;
     }    
 
-public void editDoctor(int ID, String last, String first, String sex, Timestamp birthday, String phoneNumber, String address, String email) {
+    public void editDoctor(int ID, String last, String first, String sex, Timestamp birthday, String phoneNumber, String address, String email) {
 	try {
 	    
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -93,8 +93,6 @@ public void editDoctor(int ID, String last, String first, String sex, Timestamp 
         }
     }    
 
-//SELECT queries return a JScrollPane to be displayed on the application which must be referenced in the Controller object that sets it as a parameter in a View function
-//ex. (in Controller file) view.patientOld(transactions.viewPatient());
     public JScrollPane viewDoctor() {
 	Vector columns = new Vector();
 	Vector rows = new Vector();
@@ -132,164 +130,14 @@ public void editDoctor(int ID, String last, String first, String sex, Timestamp 
 	    return null;
     }    
 
-    public String doctorLastName(int ID) {
+    public String doctorAttribute(String attribute, int ID) {
 	try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT lastName FROM doctors WHERE doctorID = " + ID);
-	    String selection = "";
-	    while (result.next())
-		selection = (String) result.getObject(1);
-	    if (selection != "")
-		return selection;
-
-	} catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
-            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
-            e.printStackTrace();
-            
-        } catch (SQLException e) {
-            System.err.println("Database connection error:");
-            System.err.println("Error Code: " + e.getErrorCode());
-            System.err.println("SQL State: " + e.getSQLState());
-            e.printStackTrace();
-        }
-	    return "";
-    }
-
-    public String doctorFirstName(int ID) {
-	try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT firstName FROM doctors WHERE doctorID = " + ID);
-	    String selection = "";
-	    while (result.next())
-		selection = (String) result.getObject(1);
-	    if (selection != "")
-		return selection;
-
-	} catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
-            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
-            e.printStackTrace();
-            
-        } catch (SQLException e) {
-            System.err.println("Database connection error:");
-            System.err.println("Error Code: " + e.getErrorCode());
-            System.err.println("SQL State: " + e.getSQLState());
-            e.printStackTrace();
-        }
-	    return "";
-    }
-
-    public String doctorSex(int ID) {
-	try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT sex FROM doctors WHERE doctorID = " + ID);
-	    String selection = "";
-	    while (result.next())
-		selection = (String) result.getObject(1);
-	    if (selection != "")
-		return selection;
-
-	} catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
-            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
-            e.printStackTrace();
-            
-        } catch (SQLException e) {
-            System.err.println("Database connection error:");
-            System.err.println("Error Code: " + e.getErrorCode());
-            System.err.println("SQL State: " + e.getSQLState());
-            e.printStackTrace();
-        }
-	    return "";
-    }
-
-    public String doctorBirthday(int ID) {
-	try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT birthday FROM doctors WHERE doctorID = " + ID);
+	    ResultSet result = connect.createStatement().executeQuery("SELECT " + attribute + " FROM doctors WHERE doctorID = " + ID);
 	    String selection = "";
 	    while (result.next())
 		selection = (String) result.getObject(1).toString();
-	    if (selection != "")
-		return selection;
-
-	} catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
-            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
-            e.printStackTrace();
-            
-        } catch (SQLException e) {
-            System.err.println("Database connection error:");
-            System.err.println("Error Code: " + e.getErrorCode());
-            System.err.println("SQL State: " + e.getSQLState());
-            e.printStackTrace();
-        }
-	    return "";
-    }
-
-    public String doctorPhoneNumber(int ID) {
-	try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT phoneNumber FROM doctors WHERE doctorID = " + ID);
-	    String selection = "";
-	    while (result.next())
-		selection = (String) result.getObject(1);
-	    if (selection != "")
-		return selection;
-
-	} catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
-            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
-            e.printStackTrace();
-            
-        } catch (SQLException e) {
-            System.err.println("Database connection error:");
-            System.err.println("Error Code: " + e.getErrorCode());
-            System.err.println("SQL State: " + e.getSQLState());
-            e.printStackTrace();
-        }
-	    return "";
-    }
-
-    public String doctorAddress(int ID) {
-	try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT address FROM doctors WHERE doctorID = " + ID);
-	    String selection = "";
-	    while (result.next())
-		selection = (String) result.getObject(1);
-	    if (selection != "")
-		return selection;
-
-	} catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
-            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
-            e.printStackTrace();
-            
-        } catch (SQLException e) {
-            System.err.println("Database connection error:");
-            System.err.println("Error Code: " + e.getErrorCode());
-            System.err.println("SQL State: " + e.getSQLState());
-            e.printStackTrace();
-        }
-	    return "";
-    }
-
-    public String doctorEmail(int ID) {
-	try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT email FROM doctors WHERE doctorID = " + ID);
-	    String selection = "";
-	    while (result.next())
-		selection = (String) result.getObject(1);
 	    if (selection != "")
 		return selection;
 
@@ -327,5 +175,167 @@ public void editDoctor(int ID, String last, String first, String sex, Timestamp 
 	    return false;
         }
 	return true;
+    }    
+
+    public void addDoctorWork(int ID, int salary, int licenseNumber, int startTime, int endTime, int max) {
+	try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+            String query = "INSERT INTO doctorWorkInfo (doctorID, salary, licenseNumber, workingStart, workingEnd, maxPatientLoad, currentPatientLoad)" +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?)";
+	    PreparedStatement insert = connect.prepareStatement(query);
+		
+	    insert.setInt(1,ID);
+	    insert.setInt(2, salary);
+	    insert.setInt(3, licenseNumber);
+	    insert.setInt(4, startTime);
+	    insert.setInt(5, endTime);
+	    insert.setInt(6, max);
+	    insert.setInt(7, 0);
+            insert.executeUpdate();
+	    insert.close();
+
+	} catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+    public void editDoctorWork(int ID, int salary, int licenseNumber, int startTime, int endTime, int max) {
+	try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+	    String statement = "UPDATE doctorWorkInfo SET salary = '" + salary + "', licenseNumber = '" + licenseNumber + "', workingStart = '" + startTime + "', workingEnd = '" + endTime + "', maxPatientLoad = '" + max + "' WHERE doctorID = " + ID;
+            connect.createStatement().executeQuery(statement);
+
+	} catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+    public String doctorWorkAttribute(String attribute, int ID) {
+	try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+	    ResultSet result = connect.createStatement().executeQuery("SELECT " + attribute + " FROM doctorWorkInfo WHERE doctorID = " + ID);
+	    String selection = "";
+	    while (result.next())
+		selection = (String) result.getObject(1).toString();
+	    if (selection != "")
+		return selection;
+
+	} catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+	    return "";
+    }
+
+    public void addDoctorSpecial(int ID, String name, String field, Timestamp certificateDate, Timestamp expiryDate) {
+	try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+            String query = "INSERT INTO doctorSpecializations (doctorID, name, field, certificateDate, expiryDate)" +
+                            "VALUES (?, ?, ?, ?, ?)";
+	    PreparedStatement insert = connect.prepareStatement(query);
+		
+	    insert.setInt(1,ID);
+	    insert.setString(2,name);
+	    insert.setString(3,field);
+	    insert.setTimestamp(4,certificateDate);
+	    insert.setTimestamp(5,expiryDate);
+            insert.executeUpdate();
+	    insert.close();
+
+	} catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+    public void removeDoctorSpecial(int ID, String name) {
+	try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+            String statement = "DELETE FROM doctorSpecializations WHERE doctorID = " + ID + " AND name = '" + name + "'";
+	    connect.createStatement().executeQuery(statement);
+
+	} catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+    public JScrollPane viewDoctorSpecial(int ID) {
+	Vector columns = new Vector();
+	Vector rows = new Vector();
+	try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+	    ResultSet result = connect.createStatement().executeQuery("SELECT * FROM doctorSpecializations WHERE doctorID = " + ID);
+	    int records = result.getMetaData().getColumnCount();
+	    for(int i=1; i<=records; i++)
+		columns.addElement(result.getMetaData().getColumnName(i));
+	    while (result.next()) {
+		Vector row = new Vector(records);
+		for(int i=1; i<=records; i++)
+		    row.addElement(result.getObject(i));
+	  	rows.addElement(row);
+	    }
+	    JTable table = new JTable(rows, columns);
+	    JScrollPane scrollPane = new JScrollPane(table);
+	    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); 
+	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+	    scrollPane.setPreferredSize(new Dimension(800, 800));
+	    return scrollPane;
+
+	} catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+	    return null;
     }    
 }
