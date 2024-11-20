@@ -73,7 +73,7 @@ public class PopulateDoctor {
             // doctor specialization
             Object[][] doctorSpecial = {
                 //example data
-                {123, "Heart Surgeon", "Cardiology", "2022-08-19", "2027-08-19"}
+                {123, "Heart Surgeon", "Cardiology", "2022-08-19 0:00:00", "2022-08-19 0:00:00"}
             };  
 
             String query2 = "INSERT INTO doctorSpecializations (doctorID, name, field, certificateDate, expiryDate)" +
@@ -84,8 +84,10 @@ public class PopulateDoctor {
                 for (Object[] i: doctorSpecial){
                     insert2.setInt(1, (int) i[0]); //doctorID
                     insert2.setString(2, (String) i[1]); //name
-                    insert2.setString(3, (String)i[2]); //certificate date
-                    insert2.setString(4, (String)i[3]); //expiry date
+                    insert2.setString(3, (String)i[2]); //field
+                    insert2.setTimestamp(4, Timestamp.valueOf(i[3].toString())); //certificate date
+                    insert2.setTimestamp(5, Timestamp.valueOf(i[4].toString())); //expiry date
+                    
 
                     insert2.executeUpdate();
                 }
