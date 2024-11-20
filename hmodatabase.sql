@@ -32,6 +32,7 @@ DROP TABLE IF EXISTS `doctorSpecializations`;
 CREATE TABLE `doctorSpecializations`(
 	`doctorID` int(10) NOT NULL,
 	`name` varchar(50) NOT NULL,
+	`field` varchar(50) NOT NULL,
     `certificateDate` date NOT NULL,
     `expiryDate` date NOT NULL,
     PRIMARY KEY (`doctorID`),
