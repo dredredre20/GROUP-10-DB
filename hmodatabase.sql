@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `doctorWorkInfo`;
 CREATE TABLE `doctorWorkInfo`(
 	`doctorID` int(10) NOT NULL,
 	`salary` int(10) NOT NULL,
-    `licenseNumber` varchar(50) NOT NULL,
+    `licenseNumber` int(20) NOT NULL,
 	`workingStart` int(4) DEFAULT NULL,
 	`workingEnd` int(4) DEFAULT NULL,
     `maxPatientLoad` int(2) NOT NULL,
