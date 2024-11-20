@@ -57,7 +57,7 @@ public class PopulateDoctor {
                 for (Object[] i: doctorWork){
                     insert1.setInt(1, (int) i[0]); //doctorID
                     insert1.setInt(2, (int) i[1]); //salary
-                    insert1.setString(3, (int) i[2]); //license number
+                    insert1.setInt(3, (int) i[2]); //license number
                     insert1.setInt(4, (int) i[3]); //working start
                     insert1.setInt(5, (int) i[4]); //working end
                     insert1.setInt(6, (int) i[5]); //max patient load
