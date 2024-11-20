@@ -73,7 +73,7 @@ public class PopulateDoctor {
             // doctor specialization
             Object[][] doctorSpecial = {
                 //example data
-                {123, "Heart Surgeon", "Cardiology", "2022-08-19 0:00:00", "2022-08-19 0:00:00"}
+                {123, "Heart Surgeon", "Cardiology", "2022-08-19", "2022-08-19"}
             };  
 
             String query2 = "INSERT INTO doctorSpecializations (doctorID, name, field, certificateDate, expiryDate)" +
