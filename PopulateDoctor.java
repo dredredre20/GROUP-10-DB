@@ -46,7 +46,7 @@ public class PopulateDoctor {
             //doctor work information
             Object[][] doctorWork = {
                 //example data
-                {123, 189000, "201-2101-0012", 1200, 1800, 35, 14}
+                {123, 189000, "20121010012", 1200, 1800, 35, 14}
             };  
 
             String query1 = "INSERT INTO doctorWorkInfo (doctorID, salary, licenseNumber, workingStart, workingEnd, maxPatientLoad, currentPatientLoad)" +
@@ -57,7 +57,7 @@ public class PopulateDoctor {
                 for (Object[] i: doctorWork){
                     insert1.setInt(1, (int) i[0]); //doctorID
                     insert1.setInt(2, (int) i[1]); //salary
-                    insert1.setString(3, (String) i[2]); //license number
+                    insert1.setString(3, (int) i[2]); //license number
                     insert1.setInt(4, (int) i[3]); //working start
                     insert1.setInt(5, (int) i[4]); //working end
                     insert1.setInt(6, (int) i[5]); //max patient load
