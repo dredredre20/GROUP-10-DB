@@ -49,15 +49,18 @@ public class Controller{
 			view.patientMenuEdit();
 			break;
 		    case 2100:
-			view.pUpdate();
+			view.pUpdate(transactions.viewRecord("patients"));
 			break;
 		    case 3100:
-			view.consult();
+			view.consult(transactions.viewRecord("consultations"));
 			break;
 		    case 3110:
 		    case 3120:
 		    case 3130:
 		    case 3140:
+		    case 3150:
+		    case 3160:
+		    case 3170:
 			view.consultUpdate();
 			break;
 		    case 4100:
@@ -106,6 +109,7 @@ public class Controller{
 
 		String gender = "";
 		DateTimeFormatter mdy = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		DateTimeFormatter mdyhm = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm");
 
 		switch(view.getMenu()) {
 		    case 1100: 
@@ -115,15 +119,54 @@ public class Controller{
 		    case 1020:
 		    case 2100:
 		    case 3110:
+			transactions.editRecord("consultations", "satisfactionRating", view.getText1(), "consultationID", view.getID());
+			break;
 		    case 3120:
+			transactions.addLabReq(Integer.parseInt(view.getText1()), view.getID(), Integer.parseInt(transactions.getRecordAttribute("consultations", "doctorID", "consultationID", String.valueOf(view.getID()))));
+			break;
 		    case 3130:
+			transactions.removeRecord2("labRequest", "laboratoryID", view.getText1(), "consultationID", view.getID());
+			break;
 		    case 3140:
+			transactions.addDiagnosis(view.getID(), view.getText1(), view.getText2());
+			break;
+		    case 3150:
+			transactions.removeRecord2("diagnosis", "diagnosisDescription", view.getText1(), "consultationID", view.getID());
+			break;
+		    case 3160:
+			transactions.addPrescription(view.getID(), Integer.parseInt(view.getText1()), view.getText2(), view.getText3(), Timestamp.valueOf(LocalDateTime.parse(view.getText4(), mdyhm)), Timestamp.valueOf(LocalDateTime.parse(view.getText5(), mdyhm)), view.getText6());
+			break;
+		    case 3170:
+			transactions.removeRecord2("prescription", "medicineID", view.getText1(), "consultationID", view.getID());
+			break;
 		    case 4100:
+			transactions.removeRecord("contactPerson", "patientID", view.getText1());
+			transactions.removeRecord("patients", "patientID", view.getText1());
+			view.setResult1("Record removed");
+			break;
 		    case 4200:
+			transactions.removeRecord("consultationComplaints", "consultationID", view.getText1());
+			transactions.removeRecord("consultations", "consultationID", view.getText1());
+			view.setResult1("Record removed");
+			break;
 		    case 4300:
+			transactions.removeRecord("doctorWorkInfo", "doctorID", view.getText1());
+			transactions.removeRecord("doctorSpecializations", "doctorID", view.getText1());
+			transactions.removeRecord("doctors", "doctorID", view.getText1());
+			view.setResult1("Record removed");
+			break;
 		    case 4400:
+			transactions.removeRecord("laboratory", "laboratoryID", view.getText1());
+			view.setResult1("Record removed");
+			break;
 		    case 4500:
+			transactions.removeRecord("complaints", "complaintDescription", view.getText1());
+			view.setResult1("Record removed");
+			break;
 		    case 4600:
+			transactions.removeRecord("medicine", "medicineID", view.getText1());
+			view.setResult1("Record removed");
+			break;
 		    case 5100:
 			if (view.isButtonSelected(view.getRadio1())) {
 			    gender = "M";
@@ -141,6 +184,8 @@ public class Controller{
 			transactions.addDoctorSpecial(view.getID(), view.getText1(), view.getText2(), Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), Timestamp.valueOf(LocalDate.parse(view.getText4(), mdy).atStartOfDay()));
 			break;
 		    case 5020:
+			transactions.removeDoctorSpecial(view.getID(), view.getText1());
+			break;
 		    case 5030:
 			if (view.isButtonSelected(view.getRadio1())) {
 			    gender = "M";
@@ -262,7 +307,7 @@ public class Controller{
 		    case 4000:
 			view.refresh();
 			view.setResult1("");
-		    	view.removePatient();
+		    	view.removePatient(transactions.viewRecord("patients"));
 			view.setVisible();
 			break;
 
@@ -308,14 +353,14 @@ public class Controller{
 			view.refresh();
 			view.setText1("");
 			view.setResult1("");
-		    	view.pUpdate();
+		    	view.pUpdate(transactions.viewRecord("patients"));
 			view.setVisible();
 		    	break;
 
 		    case 1000:
 			view.refresh();
 			view.setResult1("");
-		    	view.patientOld();
+		    	view.patientOld(transactions.viewRecord("patients"));
 			view.setVisible();
 			break;
 
@@ -336,21 +381,21 @@ public class Controller{
 		    case 3100:
 			view.refresh();
 			view.setResult1("");
-		    	view.consultUpdateLab();
+		    	view.consultUpdateLab(transactions.viewRecord("laboratory"));
 			view.setVisible();
 			break;
 
 		    case 4000:
 			view.refresh();
 			view.setResult1("");
-		    	view.removeConsult();
+		    	view.removeConsult(transactions.viewRecord("consultations"));
 			view.setVisible();
 			break;
 
 		    case 5000:
 			view.refresh();
 			view.setResult1("");
-		    	view.doctorOld(transactions.viewDoctor());
+		    	view.doctorOld(transactions.viewRecord("doctors"));
 			view.setVisible();
 			break;
 
@@ -385,7 +430,7 @@ public class Controller{
 			view.refresh();
 			view.setText1("");
 			view.setResult1("");
-		    	view.consult();
+		    	view.consult(transactions.viewRecord("consultations"));
 			view.setVisible();
 		    	break;
 
@@ -399,14 +444,14 @@ public class Controller{
 		    case 3100:
 			view.refresh();
 			view.setResult1("");
-		    	view.consultUpdateDia();
+		    	view.consultRemoveLab(transactions.viewRecord2("labRequest", "consultationID", view.getID()));
 			view.setVisible();
 			break;
 
 		    case 4000:
 			view.refresh();
 			view.setResult1("");
-		    	view.removeDoctor();
+		    	view.removeDoctor(transactions.viewRecord("doctors"));
 			view.setVisible();
 			break;
 
@@ -423,11 +468,11 @@ public class Controller{
 			view.setText4(transactions.doctorAttribute("phoneNumber", view.getID()));
 			view.setText5(transactions.doctorAttribute("address", view.getID()));
 			view.setText6(transactions.doctorAttribute("email", view.getID()));
-			view.setText7(transactions.doctorWorkAttribute("salary", view.getID()));
-			view.setText8(transactions.doctorWorkAttribute("licenseNumber", view.getID()));
-			view.setText9(transactions.doctorWorkAttribute("workingStart", view.getID()));
-			view.setText10(transactions.doctorWorkAttribute("workingEnd", view.getID()));
-			view.setText11(transactions.doctorWorkAttribute("maxPatientLoad", view.getID()));
+			view.setText7(transactions.getRecordAttribute("doctorWorkInfo", "salary", "doctorID", String.valueOf(view.getID())));
+			view.setText8(transactions.getRecordAttribute("doctorWorkInfo", "licenseNumber", "doctorID", String.valueOf(view.getID())));
+			view.setText9(transactions.getRecordAttribute("doctorWorkInfo", "workingStart", "doctorID", String.valueOf(view.getID())));
+			view.setText10(transactions.getRecordAttribute("doctorWorkInfo", "workingEnd", "doctorID", String.valueOf(view.getID())));
+			view.setText11(transactions.getRecordAttribute("doctorWorkInfo", "maxPatientLoad", "doctorID", String.valueOf(view.getID())));
 		    	view.doctorMenuEdit();
 			view.setVisible();
 			break;
@@ -463,14 +508,14 @@ public class Controller{
 		    case 3100:
 			view.refresh();
 			view.setResult1("");
-		    	view.consultUpdatePre();
+		    	view.consultUpdateDia();
 			view.setVisible();
 			break;
 
 		    case 4000:
 			view.refresh();
 			view.setResult1("");
-		    	view.removeLab();
+		    	view.removeLab(transactions.viewRecord("laboratory"));
 			view.setVisible();
 			break;
 
@@ -501,10 +546,17 @@ public class Controller{
 			view.setVisible();
 		    	break;
 
+		    case 3100:
+			view.refresh();
+			view.setResult1("");
+		    	view.consultRemoveDia(transactions.viewRecord2("diagnosis", "consultationID", view.getID()));
+			view.setVisible();
+			break;
+
 		    case 4000:
 			view.refresh();
 			view.setResult1("");
-		    	view.removeComplaint();
+		    	view.removeComplaint(transactions.viewRecord("complaints"));
 			view.setVisible();
 			break;
 
@@ -535,10 +587,17 @@ public class Controller{
 			view.setVisible();
 		    	break;
 
+		    case 3100:
+			view.refresh();
+			view.setResult1("");
+		    	view.consultUpdatePre(transactions.viewRecord("medicine"));
+			view.setVisible();
+			break;
+
 		    case 4000:
 			view.refresh();
 			view.setResult1("");
-		    	view.removeMedicine();
+		    	view.removeMedicine(transactions.viewRecord("medicine"));
 			view.setVisible();
 			break;
 
@@ -568,6 +627,13 @@ public class Controller{
 		    	view.report();
 			view.setVisible();
 		    	break;
+
+		    case 3100:
+			view.refresh();
+			view.setResult1("");
+		    	view.consultRemovePre(transactions.viewRecord2("prescription", "consultationID", view.getID()));
+			view.setVisible();
+			break;
 		}
 	    }
 	});
