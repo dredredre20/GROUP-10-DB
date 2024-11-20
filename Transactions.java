@@ -741,4 +741,113 @@ public class Transactions {
 
         return 0;
     }
+
+	// edit chief complaint 
+    public void editComplaint(String description, String recSpecialization){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+
+            String query = "UPDATE complaints SET complaintDescription = '" + description + "', recommendedSpecialization = '" + recSpecialization;
+	        connect.createStatement().executeQuery(query);
+
+	    } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+    // add medicine
+    public void addMedicine(String brandName, String commonName, int quantity, int availability){
+        try {
+	    
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+
+            String query = "INSERT INTO medicine (medicineID, brandName, commonName, quantity, availability)" +
+                            "VALUES (?, ?, ?, ?, ?)";
+	        PreparedStatement insert = connect.prepareStatement(query);
+            
+	        insert.setNull(1,0);
+	        insert.setString(2, brandName);
+	        insert.setString(3, commonName);
+	        insert.setInt(4, quantity);
+            insert.setInt(5, availability);
+
+                insert.executeUpdate();
+	        insert.close();
+
+	    } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+    // edit medicine
+    public void editMedicine(String brandName, String commonName, int quantity, int availability){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+
+            String query = "UPDATE medicine SET brandName = '" + brandName + "', commonName = '" + commonName + "', quantity = '" + quantity + "', availability = '" + availability;
+	        connect.createStatement().executeQuery(query);
+
+	    } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+     // book consultation
+    public void bookAppointment(Timestamp from, Timestamp to, String complaint, int doctorID){
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+            String query = "INSERT INTO consultations (consultationID, patientID, doctorID, consultationDate, satisfactionRating, startDate, endDate)" +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?)";
+	    PreparedStatement insert = connect.prepareStatement(query);
+		
+	    insert.setNull(1,0); // not final
+        insert.setNull(2,0); // not final
+        insert.setNull(3,0); // not final
+	    insert.setNull(4, 0); // not final
+	    insert.setNull(5, 0); // not final
+	    insert.setTimestamp(6, from);
+	    insert.setTimestamp(7, to);
+            insert.executeUpdate();
+	    insert.close();
+
+	} catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
 }
