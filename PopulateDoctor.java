@@ -58,10 +58,10 @@ public class PopulateDoctor {
                     insert1.setInt(1, (int) i[0]); //doctorID
                     insert1.setInt(2, (int) i[1]); //salary
                     insert1.setString(3, (String) i[2]); //license number
-                    insert1.setString(4, (int) i[3]); //working start
-                    insert1.setString(5, (int) i[3]); //working end
-                    insert1.setInt(6, (int) i[4]); //max patient load
-                    insert1.setInt(7, (int) i[5]); //current patient load
+                    insert1.setInt(4, (int) i[3]); //working start
+                    insert1.setInt(5, (int) i[4]); //working end
+                    insert1.setInt(6, (int) i[5]); //max patient load
+                    insert1.setInt(7, (int) i[6]); //current patient load
 
                     insert1.executeUpdate();
                 }
