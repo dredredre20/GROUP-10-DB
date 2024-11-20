@@ -337,5 +337,224 @@ public class Transactions {
             e.printStackTrace();
         }
 	    return null;
-    }    
+    } 
+
+// for viewing complaints
+    public JScrollPane viewComplaints() {
+
+	    Vector columns = new Vector();
+	    Vector rows = new Vector();
+
+	    try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+
+	        ResultSet result = connect.createStatement().executeQuery("SELECT complaintDescription FROM complaints" +
+                            "ORDER BY complaintDescription");
+
+	        int records = result.getMetaData().getColumnCount();
+
+	    for(int i=1; i<=records; i++)
+
+		    columns.addElement(result.getMetaData().getColumnName(i));
+            
+	    while (result.next()) {
+        
+		    Vector row = new Vector(records);
+            
+		for(int i=1; i<=records; i++)
+
+		    row.addElement(result.getObject(i));
+
+	  	    rows.addElement(row);
+	    }
+	        JTable table = new JTable(rows, columns);
+	        JScrollPane scrollPane = new JScrollPane(table);
+	        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); 
+	        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+
+	        scrollPane.setPreferredSize(new Dimension(800, 800));
+	        return scrollPane;
+
+	    } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+	        return null;
+    }
+
+
+
+    // updating the rating
+    public void editRating(int ID, int rating) {
+        try {
+            
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+                String statement = "UPDATE consultations SET satsfactionRating = " + rating + " WHERE doctorID = " + ID;
+
+                connect.createStatement().executeQuery(statement);
+    
+        } catch (ClassNotFoundException e) {
+                System.err.println("MySQL JDBC Driver not found.");
+                System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+                e.printStackTrace();
+                
+            } catch (SQLException e) {
+                System.err.println("Database connection error:");
+                System.err.println("Error Code: " + e.getErrorCode());
+                System.err.println("SQL State: " + e.getSQLState());
+                e.printStackTrace();
+            }
+    } 
+
+    // add lab request
+    public int addLabReq(int labID, int consultID, int docID) {
+        try {
+            
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+                String statement = "INSERT INTO labRequest (laboratoryID, consultationID, issuedBy)" +
+                                "VALUES (?, ?, ?)";
+
+                PreparedStatement insert = connect.prepareStatement(statement);
+            
+                insert.setInt(1, labID);
+                insert.setInt(2, consultID);
+                insert.setInt(3, docID);
+
+                insert.executeUpdate();
+                insert.close();
+
+
+                String query = "SELECT laboratoryID, consultationID FROM doctors WHERE laboratoryID = " + labID + "AND consultationID = " + consultID ;
+                ResultSet result = connect.createStatement().executeQuery(query);
+                int ID = 0;
+
+                while (result.next())
+                    ID = (int) result.getObject(1);
+
+                if (ID != 0)
+            
+                return ID;
+    
+        } catch (ClassNotFoundException e) {
+                System.err.println("MySQL JDBC Driver not found.");
+                System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+                e.printStackTrace();
+                
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+
+        return 0;
+    } 
+
+
+    // adding diagnosis
+    public int addDiagnosis(int consultID, String diagDesrciption, String severity) {
+        try {
+            
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+                String statement = "INSERT INTO diagnosis (consultationID, diagnosisDescription, severity)" +
+                                "VALUES (?, ?, ?)";
+
+                PreparedStatement insert = connect.prepareStatement(statement);
+            
+                insert.setInt(1, consultID);
+                insert.setString(2, diagDesrciption);
+                insert.setString(3, severity);
+
+                insert.executeUpdate();
+                insert.close();
+
+                String query = "SELECT * FROM diagnosis WHERE diagnosisDescription = '" + diagDesrciption + "' AND consultationID = " + consultID;
+                
+                ResultSet result = connect.createStatement().executeQuery(query);
+                int ID = 0;
+
+                while (result.next())
+                    ID = (int) result.getObject(1);
+
+                if (ID != 0)
+            
+                return ID;
+    
+        } catch (ClassNotFoundException e) {
+                System.err.println("MySQL JDBC Driver not found.");
+                System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+                e.printStackTrace();
+                
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+
+    // adding prescription
+    public int addPrescription(int medicineID, int consultID, String dosage, Timestamp startDate, Timestamp endDate, String notes){
+        try {
+            
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+                String statement = "INSERT INTO diagnosis (medicineID, consultationID, dosage, startDate, endDate, notes)" +
+                                "VALUES (?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement insert = connect.prepareStatement(statement);
+            
+                insert.setInt(1, medicineID);
+                insert.setInt(2, consultID);
+                insert.setString(3, dosage);
+                insert.setTimestamp(4, startDate);
+                insert.setTimestamp(5, endDate);
+                insert.setString(6, notes);
+                insert.executeUpdate();
+                insert.close();
+
+
+                String query = "SELECT * FROM prescription WHERE medicineID = " + medicineID + " AND consultationID = " + consultID;
+                
+                ResultSet result = connect.createStatement().executeQuery(query);
+                int ID = 0;
+
+                while (result.next())
+                    ID = (int) result.getObject(1);
+
+                if (ID != 0)
+            
+                return ID;
+    
+        } catch (ClassNotFoundException e) {
+                System.err.println("MySQL JDBC Driver not found.");
+                System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+                e.printStackTrace();
+                
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+
+	
 }
