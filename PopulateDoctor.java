@@ -73,11 +73,11 @@ public class PopulateDoctor {
             // doctor specialization
             Object[][] doctorSpecial = {
                 //example data
-                {123, "Heart Surgeon", "2022-08-19", "2027-08-19"}
+                {123, "Heart Surgeon", "Cardiology", "2022-08-19", "2027-08-19"}
             };  
 
-            String query2 = "INSERT INTO doctorSpecializations (doctorID, name, certificateDate, expiryDate)" +
-                            "VALUES (?, ?, ?, ?)";
+            String query2 = "INSERT INTO doctorSpecializations (doctorID, name, field, certificateDate, expiryDate)" +
+                            "VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement insert2 = connect.prepareStatement(query2);
 
