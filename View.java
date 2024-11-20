@@ -1017,7 +1017,7 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void doctorMenuRemove() {
+    public void doctorMenuRemove(JScrollPane scrollPane) {
 	this.setMenu(5020);
 	this.label1.setText("Input specialization to remove: ");
 	this.label2.setText("List of specializations: ");
@@ -1026,7 +1026,7 @@ public class View{
 	this.frame.add(label1);
 	this.frame.add(textField1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
