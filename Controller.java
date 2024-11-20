@@ -106,7 +106,6 @@ public class Controller{
 
 		String gender = "";
 		DateTimeFormatter mdy = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-	    	
 
 		switch(view.getMenu()) {
 		    case 1100: 
@@ -127,12 +126,25 @@ public class Controller{
 		    case 4600:
 		    case 5100:
 			if (view.isButtonSelected(view.getRadio1())) {
-			    gender = "Male";
+			    gender = "M";
 			} else {
-			    gender = "Female";
+			    gender = "F";
 			}
-			transactions.addDoctor(view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5() + " " + view.getText6() + view.getText7() + " " + view.getText8(), view.getText9());
+			view.setID(transactions.addDoctor(view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5(), view.getText6()));
+			view.refresh();
+			System.out.println(view.getID());
+			view.doctorMenu();
+			view.setVisible();
+			break;
 		    case 5010:
+			if (view.isButtonSelected(view.getRadio1())) {
+			    gender = "M";
+			} else {
+			    gender = "F";
+			}
+			transactions.editDoctor(view.getID(), view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5(), view.getText6());
+			view.setResult1("Edit success");
+			break;
 		    case 5020:
 		    case 5030:
 		    case 6100:
@@ -165,6 +177,8 @@ public class Controller{
 			view.setVisible();
 		    	break;
 		    case 5200:
+			if(transactions.doctorID(Integer.parseInt(view.getText1())))
+			    view.setID(Integer.parseInt(view.getText1()));
 			view.refresh();
 			view.setText1("");
 			view.setResult1("");
@@ -391,6 +405,16 @@ public class Controller{
 		    case 5300:
 			view.refresh();
 			view.setResult1("");
+			view.setText1(transactions.doctorLastName(view.getID()));
+			view.setText2(transactions.doctorFirstName(view.getID()));
+			if (transactions.doctorSex(view.getID()).equals("M"))
+			    view.setSelected(view.getRadio1());
+			else
+			    view.setSelected(view.getRadio2());
+			view.setText3(transactions.doctorBirthday(view.getID()));
+			view.setText4(transactions.doctorPhoneNumber(view.getID()));
+			view.setText5(transactions.doctorAddress(view.getID()));
+			view.setText6(transactions.doctorEmail(view.getID()));
 		    	view.doctorMenuEdit();
 			view.setVisible();
 			break;
