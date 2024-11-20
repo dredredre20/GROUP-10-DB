@@ -46,7 +46,7 @@ public class PopulateDoctor {
             //doctor work information
             Object[][] doctorWork = {
                 //example data
-                {123, 189000, "20121010012", 1200, 1800, 35, 14}
+                {123, 189000, 20121010, 1200, 1800, 35, 14}
             };  
 
             String query1 = "INSERT INTO doctorWorkInfo (doctorID, salary, licenseNumber, workingStart, workingEnd, maxPatientLoad, currentPatientLoad)" +
