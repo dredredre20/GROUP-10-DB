@@ -16,6 +16,9 @@ public class View{
     private int		menu; //used for determining actions
     private int		select;
     private JFrame 	frame;
+  
+    private int 	ID;
+    private String	selection;
 
     private JButton	back = new JButton("Back");
     private JButton	confirm = new JButton("Confirm");
@@ -119,6 +122,22 @@ public class View{
 
     public int getMenu() {
 	return this.menu;
+    }
+
+    public void setID(int ID) {
+	this.ID = ID;
+    }
+
+    public int getID() {
+	return this.ID;
+    }
+
+    public void setSelection(String selection) {
+	this.selection = selection;
+    }
+
+    public String getSelection() {
+	return this.selection;
     }
 
     public void setSelect(int select) {
@@ -308,6 +327,10 @@ public class View{
 
     public JRadioButton getRadio2() {
 	return this.radio2;
+    }
+
+    public void setSelected(JRadioButton button) {
+	button.setSelected(true);
     }
 
     public void setBack(ActionListener actionListener) {
@@ -896,29 +919,19 @@ public class View{
 
     public void doctorNew() {
 	this.setMenu(5100);
-	this.label1.setText("Input Doctor Data");
 	this.label2.setText("Last Name: ");
 	this.label3.setText("First Name: ");
 	this.label4.setText("Sex: ");
 	this.label5.setText("Birthday (mm/dd/yyyy): ");
 	this.label6.setText("Phone Number: ");
-	this.label7.setText("Home Address: ");
-	this.label8.setText("Street: ");
-	this.label9.setText("City: ");
-	this.label10.setText("Province: ");
-	this.label11.setText("Postal Code: ");
-	this.label12.setText("Email: ");
-	this.label13.setText("Salary: ");
-	this.label14.setText("License Number: ");
-	this.label15.setText("Working Hours (hh:mm) (24h format): ");
-	this.label16.setText("From: ");
-	this.label17.setText("To");
-	this.label18.setText("Max Patient Load: ");
-	this.label19.setText("Specialization: ");
-	this.label20.setText("Specialization Field: ");
-	this.label21.setText("Specialization Certificate Date (mm/dd/yyyy): ");
-	this.label22.setText("Specialization Expiry Date (mm/dd/yyyy): ");
-
+	this.label7.setText("Home Address (Street, City, Province, Postal Code): ");
+	this.label8.setText("Email: ");
+	this.label9.setText("Salary: ");
+	this.label10.setText("License Number: ");
+	this.label11.setText("Working Hours (hh:mm) (24h format): ");
+	this.label12.setText("From: ");
+	this.label13.setText("To");
+	this.label14.setText("Max Patient Load: ");
 
 	this.radio1.setText("Male");
 	this.radio2.setText("Female");
@@ -940,35 +953,20 @@ public class View{
 	this.frame.add(label6);
 	this.frame.add(textField4);
 	this.frame.add(label7);
-	this.frame.add(label8);
 	this.frame.add(textField5);
-	this.frame.add(label9);
+	this.frame.add(label8);
 	this.frame.add(textField6);
-	this.frame.add(label10);
+	this.frame.add(label9);
 	this.frame.add(textField7);
-	this.frame.add(label11);
+	this.frame.add(label10);
 	this.frame.add(textField8);
+	this.frame.add(label11);
 	this.frame.add(label12);
 	this.frame.add(textField9);
 	this.frame.add(label13);
 	this.frame.add(textField10);
 	this.frame.add(label14);
 	this.frame.add(textField11);
-	this.frame.add(label15);
-	this.frame.add(label16);
-	this.frame.add(textField12);
-	this.frame.add(label17);
-	this.frame.add(textField13);
-	this.frame.add(label18);
-	this.frame.add(textField14);
-	this.frame.add(label19);
-	this.frame.add(textField15);
-	this.frame.add(label20);
-	this.frame.add(textField16);
-	this.frame.add(label21);
-	this.frame.add(textField17);
-	this.frame.add(label22);
-	this.frame.add(textField18);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
@@ -1041,24 +1039,19 @@ public class View{
 	this.label4.setText("Sex: ");
 	this.label5.setText("Birthday (mm/dd/yyyy): ");
 	this.label6.setText("Phone Number: ");
-	this.label7.setText("Home Address: ");
-	this.label8.setText("Street: ");
-	this.label9.setText("City: ");
-	this.label10.setText("Province: ");
-	this.label11.setText("Postal Code: ");
-	this.label12.setText("Email: ");
-	this.label13.setText("Salary: ");
-	this.label14.setText("License Number: ");
-	this.label15.setText("Working Hours (hh:mm) (24h format): ");
-	this.label16.setText("From: ");
-	this.label17.setText("To");
-	this.label18.setText("Max Patient Load: ");
+	this.label7.setText("Home Address (Street, City, Province, Postal Code): ");
+	this.label8.setText("Email: ");
+	this.label9.setText("Salary: ");
+	this.label10.setText("License Number: ");
+	this.label11.setText("Working Hours (hh:mm) (24h format): ");
+	this.label12.setText("From: ");
+	this.label13.setText("To");
+	this.label14.setText("Max Patient Load: ");
 
 	this.radio1.setText("Male");
 	this.radio2.setText("Female");
 	this.bg.add(radio1);
 	this.bg.add(radio2);
-	this.radio1.setSelected(true);
 
 	this.frame.add(back);
 	this.frame.add(label1);
@@ -1074,27 +1067,20 @@ public class View{
 	this.frame.add(label6);
 	this.frame.add(textField4);
 	this.frame.add(label7);
-	this.frame.add(label8);
 	this.frame.add(textField5);
-	this.frame.add(label9);
+	this.frame.add(label8);
 	this.frame.add(textField6);
-	this.frame.add(label10);
+	this.frame.add(label9);
 	this.frame.add(textField7);
-	this.frame.add(label11);
+	this.frame.add(label10);
 	this.frame.add(textField8);
+	this.frame.add(label11);
 	this.frame.add(label12);
 	this.frame.add(textField9);
 	this.frame.add(label13);
 	this.frame.add(textField10);
 	this.frame.add(label14);
 	this.frame.add(textField11);
-	this.frame.add(label15);
-	this.frame.add(label16);
-	this.frame.add(textField12);
-	this.frame.add(label17);
-	this.frame.add(textField13);
-	this.frame.add(label18);
-	this.frame.add(textField14);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
