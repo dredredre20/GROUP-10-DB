@@ -10,15 +10,17 @@ public class Controller{
     private View view;
     private Model model;
     private Transactions transactions;
+    private HMOReports reports;
 
     public View getView() {
 	return this.view;
     }
 
-    public Controller(View view, Model model, Transactions transactions) {
+    public Controller(View view, Model model, Transactions transactions, HMOReports reports) {
 	this.view = view;
 	this.model = model;
 	this.transactions = transactions;
+	this.reports = reports;
 
 	this.getView().setBack(new ActionListener() {
 	    @Override
@@ -97,6 +99,28 @@ public class Controller{
 			break;
 		    case 6610:
 			view.referMedEdit();
+			break;
+		    case 7100:
+		    case 7200:
+		    case 7300:
+		    case 7400:
+			view.report();
+			break;
+		    case 7110:
+		    case 7120:
+			view.reportConsult();
+			break;
+		    case 7210:
+		    case 7220:
+			view.reportHealth();
+			break;
+		    case 7310:
+		    case 7320:
+			view.reportPerf();
+			break;
+		    case 7410:
+		    case 7420:
+			view.reportComm();
 			break;
 		}
 		view.setVisible();
@@ -337,8 +361,34 @@ public class Controller{
 			break;
 
 		    case 7000:
-			view.setResult1("test");
+			view.refresh();
+			view.reportConsult();
+			view.setVisible();
 			break;
+
+		    case 7100:
+			view.refresh();
+			view.reportConsultMonth(reports.monthlyPerformanceEvaluation(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+			view.setVisible();
+			break;
+
+		    case 7200:
+			view.refresh();
+			view.reportHealthMonth(reports.monthlyPerformanceEvaluation(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+			view.setVisible();
+			break;
+
+		    case 7300:
+			view.refresh();
+			view.reportPerfMonth(reports.monthlyPerformanceEvaluation(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+			view.setVisible();
+			break;
+
+		    case 7400:
+			view.refresh();
+			view.reportCommMonth(reports.monthlyPerformanceEvaluation(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+			view.setVisible();
+			break;			
 		}
 
 	    }
@@ -414,8 +464,34 @@ public class Controller{
 			break;
 
 		    case 7000:
-			view.setResult1("test");
+			view.refresh();
+			view.reportHealth();
+			view.setVisible();
 			break;
+
+		    case 7100:
+			view.refresh();
+			view.reportConsultYear(reports.YearlyPerformanceEvaluation(Integer.parseInt(view.getText2())));
+			view.setVisible();
+			break;
+
+		    case 7200:
+			view.refresh();
+			view.reportHealthYear(reports.YearlyPerformanceEvaluation(Integer.parseInt(view.getText2())));
+			view.setVisible();
+			break;
+
+		    case 7300:
+			view.refresh();
+			view.reportPerfYear(reports.YearlyPerformanceEvaluation(Integer.parseInt(view.getText2())));
+			view.setVisible();
+			break;
+
+		    case 7400:
+			view.refresh();
+			view.reportCommYear(reports.YearlyPerformanceEvaluation(Integer.parseInt(view.getText2())));
+			view.setVisible();
+			break;		
 		}
 
 	    }
@@ -485,7 +561,9 @@ public class Controller{
 			break;
 
 		    case 7000:
-			view.setResult1("test");
+			view.refresh();
+			view.reportPerf();
+			view.setVisible();
 			break;
 		}
 
@@ -527,7 +605,9 @@ public class Controller{
 			break;
 
 		    case 7000:
-			view.setResult1("test");
+			view.refresh();
+			view.reportComm();
+			view.setVisible();
 			break;
 		}
 	    }
