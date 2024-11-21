@@ -1345,16 +1345,154 @@ public class View{
 	this.setMenu(7000);
 	this.label1.setText("Generate monthly/yearly reports");
 	this.button1.setText("HMO Consultations Report");
-	this.button2.setText("Department Performance Evaluation Report");
-	this.button3.setText("Health Risks Based on Patient Demographics Report");
-	this.button4.setText("Something");
+	this.button2.setText("Health Risks Based on Patient Demographics Report");
+	this.button3.setText("Performance Evaluation Report");
+	this.button4.setText("Commission of the Doctors and Specializations Report");
 	
 	this.frame.add(back);
 	this.frame.add(button1);
 	this.frame.add(button2);
 	this.frame.add(button3);
 	this.frame.add(button4);
+    }
+
+    public void reportConsult() {
+	this.setMenu(7100);
+	this.label1.setText("Input month: ");
+	this.label2.setText("Input year: ");
+	this.button1.setText("Generate monthly report");
+	this.button2.setText("Generate yearly report");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(textField2);
 	this.frame.add(result1);
-	this.frame.add(scrollPane1);
+	this.frame.add(button1);
+	this.frame.add(button2);
+    }
+
+    public void reportConsultMonth(JScrollPane scrollPane) {
+	this.setMenu(7110);
+	this.label1.setText("Report: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(scrollPane);
+    }
+
+    public void reportConsultYear(JScrollPane scrollPane) {
+	this.setMenu(7120);
+	this.label1.setText("Report: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(scrollPane);
+    }
+
+    public void reportHealth() {
+	this.setMenu(7200);
+	this.label1.setText("Input month: ");
+	this.label2.setText("Input year: ");
+	this.button1.setText("Generate monthly report");
+	this.button2.setText("Generate yearly report");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(textField2);
+	this.frame.add(result1);
+	this.frame.add(button1);
+	this.frame.add(button2);
+    }
+
+    public void reportHealthMonth(JScrollPane scrollPane) {
+	this.setMenu(7210);
+	this.label1.setText("Report: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(scrollPane);
+    }
+
+    public void reportHealthYear(JScrollPane scrollPane) {
+	this.setMenu(7220);
+	this.label1.setText("Report: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(scrollPane);
+    }
+
+    public void reportPerf() {
+	this.setMenu(7300);
+	this.label1.setText("Input month: ");
+	this.label2.setText("Input year: ");
+	this.button1.setText("Generate monthly report");
+	this.button2.setText("Generate yearly report");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(textField2);
+	this.frame.add(result1);
+	this.frame.add(button1);
+	this.frame.add(button2);
+    }
+
+    public void reportPerfMonth(JScrollPane scrollPane) {
+	this.setMenu(7310);
+	this.label1.setText("Report: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(scrollPane);
+    }
+
+    public void reportPerfYear(JScrollPane scrollPane) {
+	this.setMenu(7320);
+	this.label1.setText("Report: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(scrollPane);
+    }
+
+    public void reportComm() {
+	this.setMenu(7400);
+	this.label1.setText("Input month: ");
+	this.label2.setText("Input year: ");
+	this.button1.setText("Generate monthly report");
+	this.button2.setText("Generate yearly report");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(textField1);
+	this.frame.add(label2);
+	this.frame.add(textField2);
+	this.frame.add(result1);
+	this.frame.add(button1);
+	this.frame.add(button2);
+    }
+
+    public void reportCommMonth(JScrollPane scrollPane) {
+	this.setMenu(7410);
+	this.label1.setText("Report: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(scrollPane);
+    }
+
+    public void reportCommYear(JScrollPane scrollPane) {
+	this.setMenu(7420);
+	this.label1.setText("Report: ");
+	
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(scrollPane);
     }
 }
