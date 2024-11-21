@@ -117,5 +117,90 @@ public class HMOReports {
             e.printStackTrace();
         }
     }
+
+
+
+    // monthly acconomodations 
+    public void monthlyPatientAccomodations(int year, int month){
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+
+
+            // sub query will retrieve total count of unique patients in the entire data set
+
+            String query = "SELECT " +
+                        "YEAR(c.consultationDate) AS year, " +
+                        "MONTH(c.consultationDate) AS month, " +
+                        "COUNT(DISTINCT c.patientID) AS avg_patients_per_month, " +
+                        "COUNT(c.consultationID) AS total_consultations, " +
+                        "ROUND(COUNT(DISTINCT c.patientID) * 100.0 /(SELECT COUNT(DISTINCT patientID) FROM consultations), 2) AS patient_percentage, " +
+                        "FROM consultations c " +
+                        "WHERE YEAR(c.consultationDate) = ? AND MONTH(c.consultationDate) = ? " +
+                        "GROUP BY YEAR(c.consultationDate), MONTH(c.consultationDate) " +
+                        "ORDER BY patient_percentage DESC, total_consultations DESC";
+            
+
+            PreparedStatement access = connect.prepareStatement(query);
+
+            access.setInt(1, year);
+            access.setInt(2, month);
+            access.executeUpdate();
+            
+            access.close();
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+
+    }
+
+    // yearly patient accomodations
+    public void yearlyPatientAccomodations(int year){
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+
+            String query = "SELECT " +
+                        "YEAR(c.consultationDate) AS year, " +
+                        "COUNT(DISTINCT c.patientID) AS avg_patients_per_month, " +
+                        "COUNT(c.consultationID) AS total_consultations, " +
+                        "ROUND(COUNT(DISTINCT c.patientID) * 100.0 /(SELECT COUNT(DISTINCT patientID) FROM consultations), 2) AS patient_percentage, " +
+                        "FROM consultations c " +
+                        "WHERE YEAR(c.consultationDate) = ? " +
+                        "GROUP BY YEAR(c.consultationDate) " +
+                        "ORDER BY patient_percentage DESC, total_consultations DESC";
+
+            PreparedStatement access = connect.prepareStatement(query);
+
+            access.setInt(1, year);
+            access.executeUpdate();
+            
+            access.close();
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
     
 }
