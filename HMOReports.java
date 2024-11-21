@@ -1,5 +1,8 @@
 import java.sql.*;
-
+import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import java.awt.Dimension;
 
 // Generating reports
 public class HMOReports {
@@ -28,8 +31,9 @@ public class HMOReports {
 
 
     // monthly performance evaluation
-    public void monthlyPerformanceEvaluation(int year, int month){
-
+    public JScrollPane monthlyPerformanceEvaluation(int year, int month){
+	Vector columns = new Vector();
+	Vector rows = new Vector();
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -56,9 +60,25 @@ public class HMOReports {
 
             access.setInt(1, year);
             access.setInt(2, month);
-            access.executeUpdate();
+            ResultSet result = access.executeQuery();
             
             access.close();
+
+	    int records = result.getMetaData().getColumnCount();
+	    for(int i=1; i<=records; i++)
+		columns.addElement(result.getMetaData().getColumnName(i));
+	    while (result.next()) {
+		Vector row = new Vector(records);
+		for(int i=1; i<=records; i++)
+		    row.addElement(result.getObject(i));
+	  	rows.addElement(row);
+	    }
+	    JTable table = new JTable(rows, columns);
+	    JScrollPane scrollPane = new JScrollPane(table);
+	    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); 
+	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+	    scrollPane.setPreferredSize(new Dimension(800, 800));
+	    return scrollPane;
 
         } catch (ClassNotFoundException e) {
             System.err.println("MySQL JDBC Driver not found.");
@@ -71,12 +91,14 @@ public class HMOReports {
             System.err.println("SQL State: " + e.getSQLState());
             e.printStackTrace();
         }
-
+	return null;
     }
 
 
     // yearly performance evaluation
-    public void YearlyPerformanceEvaluation(int year){
+    public JScrollPane YearlyPerformanceEvaluation(int year){
+	Vector columns = new Vector();
+	Vector rows = new Vector();
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -101,9 +123,25 @@ public class HMOReports {
             PreparedStatement access = connect.prepareStatement(query);
 
             access.setInt(1, year);
-            access.executeUpdate();
+	    ResultSet result = access.executeQuery();
             
             access.close();
+
+	    int records = result.getMetaData().getColumnCount();
+	    for(int i=1; i<=records; i++)
+		columns.addElement(result.getMetaData().getColumnName(i));
+	    while (result.next()) {
+		Vector row = new Vector(records);
+		for(int i=1; i<=records; i++)
+		    row.addElement(result.getObject(i));
+	  	rows.addElement(row);
+	    }
+	    JTable table = new JTable(rows, columns);
+	    JScrollPane scrollPane = new JScrollPane(table);
+	    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); 
+	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+	    scrollPane.setPreferredSize(new Dimension(800, 800));
+	    return scrollPane;
 
         } catch (ClassNotFoundException e) {
             System.err.println("MySQL JDBC Driver not found.");
@@ -116,6 +154,7 @@ public class HMOReports {
             System.err.println("SQL State: " + e.getSQLState());
             e.printStackTrace();
         }
+	return null;
     }
 
 
