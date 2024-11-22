@@ -133,7 +133,7 @@ public class Controller{
 
 		String gender = "";
 		DateTimeFormatter mdy = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-		DateTimeFormatter mdyhm = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm");
+		DateTimeFormatter mdyhm = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
 
 		switch(view.getMenu()) {
 		    case 1100: 
@@ -244,8 +244,7 @@ public class Controller{
 		    	break;
 		    case 3000:
 			view.refresh();
-			view.setText1("");
-			view.setResult1("");
+			view.setID(Integer.parseInt(view.getText1()));
 		    	view.consultUpdate();
 			view.setVisible();
 		    	break;
