@@ -308,11 +308,19 @@ public class HMOReports {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-            String query = "SELECT " + "p.gender, " + "d.diagnosisDescription, " + "d.severity " +
-                           "FROM patients p JOIN consultations c ON p.patientID = c.patientID " +
-                           "JOIN diagnosis d ON c.consultationID = d.diagnosisID " +
-                           "WHERE YEAR(c.consultationDate) = ? AND MONTH(c.consultationDate) = ?" +
-                           "GROUP BY YEAR(c.consultationDate) AND MONTH(c.consultationDate);"; // Select age, gender, medicine and previous diagnosis that may increase patient susceptibility
+            String query = "SELECT YEAR(c.consultationDate) as year, MONTH(c.consultationDate) as month" + 
+                            "p.sex, " + 
+                            "TIMESTAMPDIFF(YEAR, p.birthday, c.consultationDate) as age" + 
+                            "d.diagnosisDescription, " + 
+                            "d.severity " + 
+                            "COUNT(d.diagnosisDescription) AS diagnosis_count" + 
+                            "FROM patients p JOIN consultations c ON p.patientID = c.patientID " +
+                            "JOIN diagnosis d ON c.consultationID = d.consultationID " +
+                            "WHERE YEAR(c.consultationDate) = ? AND MONTH(c.consultationDate) = ?" +
+                            "GROUP BY YEAR(c.consultationDate), MONTH(c.consultationDate), p.sex, age, d.diagnosisDescription, d.severity" + 
+                            "ORDER BY year, month, diagnosis_count DESC;"; 
+                           
+                           // Select age, gender, medicine and previous diagnosis that may increase patient susceptibility
 
             PreparedStatement access = connect.prepareStatement(query);
 
@@ -367,11 +375,17 @@ public class HMOReports {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-            String query = "SELECT " + "p.gender, " + "d.diagnosisDescription, " + "d.severity " +
-                           "FROM patients p JOIN consultations c ON p.patientID = c.patientID " +
-                           "JOIN diagnosis d ON c.consultationID = d.diagnosisID " +
-                           "WHERE YEAR(c.consultationDate) = ?" +
-                           "GROUP BY YEAR(c.consultationDate);";
+            String query = "SELECT YEAR(c.consultationDate) as year, " + 
+                            "p.sex, " + 
+                            "TIMESTAMPDIFF(YEAR, p.birthday, c.consultationDate) as age" + 
+                            "d.diagnosisDescription, " + 
+                            "d.severity " + 
+                            "COUNT(d.diagnosisDescription) AS diagnosis_count" + 
+                            "FROM patients p JOIN consultations c ON p.patientID = c.patientID " +
+                            "JOIN diagnosis d ON c.consultationID = d.consultationID " +
+                            "WHERE YEAR(c.consultationDate) = ? " +
+                            "GROUP BY YEAR(c.consultationDate), p.sex, age, d.diagnosisDescription, d.severity" + 
+                            "ORDER BY year,  diagnosis_count DESC;";
 
             PreparedStatement access = connect.prepareStatement(query);
 
