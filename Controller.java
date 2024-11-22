@@ -43,6 +43,7 @@ public class Controller{
 			break;
 		    case 1010:
 		    case 1020:
+		    case 1021:
 			view.patientMenu();
 			break;
 		    case 1011:
@@ -92,13 +93,13 @@ public class Controller{
 			view.refer();
 			break;
 		    case 6210:
-			view.referLabEdit();
+			view.referLabEdit(transactions.viewRecord("laboratory"));
 			break;
 		    case 6410:
-			view.referCompEdit();
+			view.refer();
 			break;
 		    case 6610:
-			view.referMedEdit();
+			view.referMed();
 			break;
 		    case 7100:
 		    case 7200:
@@ -164,7 +165,22 @@ public class Controller{
 			transactions.editPatient(view.getID(), view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5(), view.getText6(), view.getText7());
 			break;
 		    case 1020:
+			if (transactions.availableDoctors(LocalDateTime.parse(view.getText1(), mdyhm), LocalDateTime.parse(view.getText2(), mdyhm), transactions.getRecordAttribute("complaints", "recommendedSpecialization", "complaintDescription", view.getText3())) != null) {
+			view.refresh();
+			view.patientMenuConsultDoctor(transactions.availableDoctors(LocalDateTime.parse(view.getText1(), mdyhm), LocalDateTime.parse(view.getText2(), mdyhm), transactions.getRecordAttribute("complaints", "recommendedSpecialization", "complaintDescription", view.getText3())));
+			view.setVisible();
+			} else {
+			    view.setResult1("No available doctors");
+			}
+			break;
 		    case 2100:
+			if (view.isButtonSelected(view.getRadio1())) {
+			    gender = "M";
+			} else {
+			    gender = "F";
+			}
+			transactions.editPatient(view.getID(), view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5(), view.getText6(), view.getText7());
+			break;
 		    case 3110:
 			transactions.editRecord("consultations", "satisfactionRating", view.getText1(), "consultationID", view.getID());
 			break;
@@ -244,53 +260,60 @@ public class Controller{
 			view.setResult1("Edit success");
 			break;
 		    case 6100:
+			transactions.addLab(view.getText1(), view.getText2(), view.getText3());
+			break;
 		    case 6210:
+			transactions.editLab(view.getID(), view.getText1(), view.getText2(), view.getText3());
+			break;
 		    case 6300:
+			transactions.addComplaint(view.getText1(), view.getText2());
+			break;
 		    case 6410:
+			transactions.editComplaint(view.getText1(), view.getText2());
+			break;
 		    case 6500:
+			transactions.addMedicine(view.getText1(), view.getText2(), Integer.parseInt(view.getText3()), Integer.parseInt(view.getText4()));
+			break;
 		    case 6610:
-			view.setResult1("test");
+			transactions.editMedicine(view.getText1(), view.getText2(), Integer.parseInt(view.getText3()), Integer.parseInt(view.getText4()));
 		    	break;
 		    case 1200:
-			view.refresh();
-			view.setText1("");
-			view.setResult1("");
-		    	view.patientMenu();
-			view.setVisible();
+			try {
+			if (transactions.patientID(Integer.parseInt(view.getText1()))) {
+			    view.refresh();
+			    view.setID(Integer.parseInt(view.getText1()));
+			    view.setText1("");
+			    view.setResult1("");
+		    	    view.patientMenu();
+			    view.setVisible();	
+			} else {
+			    view.setResult1("ID does not exist");
+			}
+			} catch (Exception _) {
+			    view.setResult1("Input an integer");
+			}
 		    	break;
-
-
-				
 		    case 2000:
 			view.refresh();
-			view.refresh();
-			view.setText1("");
-
-			if(transactions.patientID(Integer.parseInt(view.getText1())))
+			if(transactions.patientID(Integer.parseInt(view.getText1()))) {
 				view.setID(Integer.parseInt(view.getText1()));
 				view.refresh();
-				view.setText1("");
-				view.setText2(transactions.patientAttribute("patientLastName", view.getID()));
-				view.setText3(transactions.patientAttribute("patientFirstName", view.getID()));
+				view.setText1(transactions.patientAttribute("patientLastName", view.getID()));
+				view.setText2(transactions.patientAttribute("patientFirstName", view.getID()));
 				if (transactions.patientAttribute("sex", view.getID()).equals("M"))
 					view.setSelected(view.getRadio1());
 				else
 					view.setSelected(view.getRadio2());
-				view.setText4(transactions.patientAttribute("birthday", view.getID()));
-				view.setText5(transactions.patientAttribute("phoneNumber", view.getID()));
-				view.setText6(transactions.patientAttribute("address", view.getID()));
-				view.setText7(transactions.patientAttribute("bloodType", view.getID()));
-		    	view.patientMenu();
-				view.setVisible	();
-
-				
+				view.setText3(transactions.patientAttribute("birthday", view.getID()));
+				view.setText4(transactions.patientAttribute("phoneNumber", view.getID()));
+				view.setText5(transactions.patientAttribute("address", view.getID()));
+				view.setText6(transactions.patientAttribute("bloodType", view.getID()));
+				view.setText7(transactions.patientAttribute("allergies", view.getID()));
 			view.setResult1("");
 		    	view.pUpdateData();
 			view.setVisible();
-		    	break;
-
-
-				
+			}
+			break;
 		    case 3000:
 			view.refresh();
 			view.setID(Integer.parseInt(view.getText1()));
@@ -307,25 +330,52 @@ public class Controller{
 			view.setVisible();
 		    	break;
 		    case 6200:
-			view.refresh();
-			view.setText1("");
-			view.setResult1("");
-		    	view.referLabEditData();
-			view.setVisible();
+			try {
+			    if(transactions.findID(view.getText1(),"laboratory","laboratoryID")) {
+			    	view.refresh();
+			    	view.setID(Integer.parseInt(view.getText1()));
+			    	view.setText1("");
+			    	view.setResult1("");
+		    	    	view.referLabEditData();
+			    	view.setVisible();
+                            } else {
+			    	view.setResult1("ID not found");
+			    }
+			} catch (Exception _) {
+			    view.setResult1("Input an integer");
+			}
 		    	break;
 		    case 6400:
-			view.refresh();
-			view.setText1("");
-			view.setResult1("");
-		    	view.referCompEditData();
-			view.setVisible();
+			try {
+			    if(transactions.findID(view.getText1(),"complaints","complaintDescription")) {
+			    	view.refresh();
+			    	view.setID(Integer.parseInt(view.getText1()));
+			    	view.setText1("");
+			    	view.setResult1("");
+		    	    	view.referCompEditData(transactions.getSpecial());
+			    	view.setVisible();
+                            } else {
+			    	view.setResult1("ID not found");
+			    }
+			} catch (Exception _) {
+			    view.setResult1("Invalid input");
+			}
 		    	break;
 		    case 6600:
-			view.refresh();
-			view.setText1("");
-			view.setResult1("");
-		    	view.referMedEditData();
-			view.setVisible();
+			try {
+			    if(transactions.findID(view.getText1(),"medicine","medicineID")) {
+			    	view.refresh();
+			    	view.setID(Integer.parseInt(view.getText1()));
+			    	view.setText1("");
+			    	view.setResult1("");
+		    	    	view.referMedEditData();
+			    	view.setVisible();
+                            } else {
+			    	view.setResult1("ID not found");
+			    }
+			} catch (Exception _) {
+			    view.setResult1("Invalid input");
+			}
 		    	break;
 		}
 	    }
@@ -416,10 +466,8 @@ public class Controller{
 
 		    case 7100:
 			view.refresh();
-			view.reportConsultMonth(reports.monthlyPatientAccomodations(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));		
-			view.setVisible();
+			view.reportConsultMonth(reports.monthlyPatientAccomodations(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));					view.setVisible();
 			break;
-
 
 		    case 7200:
 			view.refresh();
@@ -466,7 +514,7 @@ public class Controller{
 		    case 1300:
 			view.refresh();
 			view.setResult1("");
-		    	view.patientMenuConsult();
+		    	view.patientMenuConsult(transactions.viewRecord("complaints"));
 			view.setVisible();
 			break;
 
@@ -508,7 +556,7 @@ public class Controller{
 		    case 6000:
 			view.refresh();
 			view.setResult1("");
-		    	view.referLabEdit();
+		    	view.referLabEdit(transactions.viewRecord("laboratory"));
 			view.setVisible();
 			break;
 
@@ -540,7 +588,7 @@ public class Controller{
 			view.refresh();
 			view.reportCommYear(reports.yearlyCommissionReport(Integer.parseInt(view.getText2())));
 			view.setVisible();
-			break;
+			break;		
 		}
 
 	    }
@@ -561,11 +609,24 @@ public class Controller{
 
 		    case 1010:
 			view.refresh();
+			if(transactions.patientID(view.getID())) {
+				view.refresh();
+				view.setText1(transactions.patientAttribute("patientLastName", view.getID()));
+				view.setText2(transactions.patientAttribute("patientFirstName", view.getID()));
+				if (transactions.patientAttribute("sex", view.getID()).equals("M"))
+					view.setSelected(view.getRadio1());
+				else
+					view.setSelected(view.getRadio2());
+				view.setText3(transactions.patientAttribute("birthday", view.getID()));
+				view.setText4(transactions.patientAttribute("phoneNumber", view.getID()));
+				view.setText5(transactions.patientAttribute("address", view.getID()));
+				view.setText6(transactions.patientAttribute("bloodType", view.getID()));
+				view.setText7(transactions.patientAttribute("allergies", view.getID()));
 			view.setResult1("");
 		    	view.patientMenuEditPatient();
 			view.setVisible();
+			}
 			break;
-
 		    case 3100:
 			view.refresh();
 			view.setResult1("");
@@ -605,7 +666,7 @@ public class Controller{
 		    case 6000:
 			view.refresh();
 			view.setResult1("");
-		    	view.referComp();
+		    	view.referComp(transactions.getSpecial());
 			view.setVisible();
 			break;
 
@@ -649,7 +710,7 @@ public class Controller{
 		    case 6000:
 			view.refresh();
 			view.setResult1("");
-		    	view.referCompEdit();
+		    	view.referCompEdit(transactions.viewRecord("complaints"));
 			view.setVisible();
 			break;
 
@@ -733,7 +794,7 @@ public class Controller{
 		    case 6000:
 			view.refresh();
 			view.setResult1("");
-		    	view.referMedEdit();
+		    	view.referMedEdit(transactions.viewRecord("medicine"));
 			view.setVisible();
 			break;
 
