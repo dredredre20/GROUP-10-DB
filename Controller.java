@@ -258,13 +258,39 @@ public class Controller{
 		    	view.patientMenu();
 			view.setVisible();
 		    	break;
+
+
+				
 		    case 2000:
 			view.refresh();
+			view.refresh();
 			view.setText1("");
+
+			if(transactions.patientID(Integer.parseInt(view.getText1())))
+				view.setID(Integer.parseInt(view.getText1()));
+				view.refresh();
+				view.setText1("");
+				view.setText2(transactions.patientAttribute("patientLastName", view.getID()));
+				view.setText3(transactions.patientAttribute("patientFirstName", view.getID()));
+				if (transactions.patientAttribute("sex", view.getID()).equals("M"))
+					view.setSelected(view.getRadio1());
+				else
+					view.setSelected(view.getRadio2());
+				view.setText4(transactions.patientAttribute("birthday", view.getID()));
+				view.setText5(transactions.patientAttribute("phoneNumber", view.getID()));
+				view.setText6(transactions.patientAttribute("address", view.getID()));
+				view.setText7(transactions.patientAttribute("bloodType", view.getID()));
+		    	view.patientMenu();
+				view.setVisible	();
+
+				
 			view.setResult1("");
 		    	view.pUpdateData();
 			view.setVisible();
 		    	break;
+
+
+				
 		    case 3000:
 			view.refresh();
 			view.setID(Integer.parseInt(view.getText1()));
