@@ -407,15 +407,11 @@ public class View{
 	this.label5.setText("Birthday (mm/dd/yyyy): ");
 	this.label6.setText("Phone Number: ");
 	this.label7.setText("Home Address: ");
-	this.label8.setText("Street: ");
-	this.label9.setText("City: ");
-	this.label10.setText("Province: ");
-	this.label11.setText("Postal Code: ");
-	this.label12.setText("Contact Person's Last Name: ");
-	this.label13.setText("Contact Person's First Name: ");
-	this.label14.setText("Contact Person's Phone Number: ");
-	this.label15.setText("Relationship with contact person: ");
-	this.label16.setText("Allergies: ");
+	this.label8.setText("Contact Person's Last Name: ");
+	this.label9.setText("Contact Person's First Name: ");
+	this.label10.setText("Contact Person's Phone Number: ");
+	this.label11.setText("Relationship with contact person: ");
+	this.label12.setText("Allergies: ");
 
 	this.radio1.setText("Male");
 	this.radio2.setText("Female");
@@ -440,24 +436,17 @@ public class View{
 	this.frame.add(label6);
 	this.frame.add(textField4);
 	this.frame.add(label7);
-	this.frame.add(label8);
 	this.frame.add(textField5);
-	this.frame.add(label9);
+	this.frame.add(label8);
 	this.frame.add(textField6);
-	this.frame.add(label10);
+	this.frame.add(label9);
 	this.frame.add(textField7);
-	this.frame.add(label11);
+	this.frame.add(label10);
 	this.frame.add(textField8);
-	this.frame.add(label12);
+	this.frame.add(label11);
 	this.frame.add(textField9);
-	this.frame.add(label13);
+	this.frame.add(label12);
 	this.frame.add(textField10);
-	this.frame.add(label14);
-	this.frame.add(textField11);
-	this.frame.add(label15);
-	this.frame.add(textField12);
-	this.frame.add(label16);
-	this.frame.add(textField13);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
@@ -518,7 +507,7 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void patientMenuEditRemoveC() {
+    public void patientMenuEditRemoveC(JScrollPane scrollPane) {
 	this.setMenu(1012);
 	this.label1.setText("Input contact person's last name: ");
 	this.label2.setText("Input contact person's first name: ");
@@ -532,7 +521,7 @@ public class View{
 	this.frame.add(confirm);
 	this.frame.add(result1);
 	this.frame.add(label3);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
     }
 
     public void patientMenuEditPatient() {
@@ -544,16 +533,8 @@ public class View{
 	this.label5.setText("Birthday (mm/dd/yyyy): ");
 	this.label6.setText("Phone Number: ");
 	this.label7.setText("Home Address: ");
-	this.label8.setText("Street: ");
-	this.label9.setText("City: ");
-	this.label10.setText("Province: ");
-	this.label11.setText("Postal Code: ");
-	this.label12.setText("Contact Person's Last Name: ");
-	this.label13.setText("Contact Person's First Name: ");
-	this.label14.setText("Contact Person's Phone Number: ");
-	this.label15.setText("Relationship with contact person: ");
-	this.label16.setText("Blood type: ");
-	this.label17.setText("Allergies: ");
+	this.label8.setText("Blood type: ");
+	this.label9.setText("Allergies: ");
 
 	this.radio1.setText("Male");
 	this.radio2.setText("Female");
@@ -575,26 +556,11 @@ public class View{
 	this.frame.add(label6);
 	this.frame.add(textField4);
 	this.frame.add(label7);
-	this.frame.add(label8);
 	this.frame.add(textField5);
-	this.frame.add(label9);
+	this.frame.add(label8);
 	this.frame.add(textField6);
-	this.frame.add(label10);
+	this.frame.add(label9);
 	this.frame.add(textField7);
-	this.frame.add(label11);
-	this.frame.add(textField8);
-	this.frame.add(label12);
-	this.frame.add(textField9);
-	this.frame.add(label13);
-	this.frame.add(textField10);
-	this.frame.add(label14);
-	this.frame.add(textField11);
-	this.frame.add(label15);
-	this.frame.add(textField12);
-	this.frame.add(label16);
-	this.frame.add(textField13);
-	this.frame.add(label17);
-	this.frame.add(textField14);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
