@@ -565,16 +565,13 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void patientMenuConsult() {
+    public void patientMenuConsult(JScrollPane scrollPane) {
 	this.setMenu(1020);
 	this.label1.setText("Input available time (mm/dd/yyyy hh:mm): ");
 	this.label2.setText("From ");
 	this.label3.setText("To ");
 	this.label4.setText("Input complaint (leave blank if not in list): ");
 	this.label5.setText("List of chief complaints: ");
-	this.label6.setText("Input doctor ID to select: ");
-	this.label7.setText("List of available doctors: ");
-	this.button1.setText("Book Consultation");
 
 	this.frame.add(back);
 	this.frame.add(label1);
@@ -585,15 +582,26 @@ public class View{
 	this.frame.add(label4);
 	this.frame.add(textField3);
 	this.frame.add(label5);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
 	this.frame.add(confirm);
 	this.frame.add(result1);
-	this.frame.add(label6);
-	this.frame.add(textField4);
-	this.frame.add(label7);
-	this.frame.add(scrollPane2);
-	this.frame.add(button1);
-	this.frame.add(result2);
+    }
+
+    public void patientMenuConsultDoctor(JScrollPane scrollPane) {
+	this.setMenu(1021);
+	this.label1.setText("Choose an available doctor to book consultation");
+	this.label2.setText("Input doctor ID to select: ");
+	this.label3.setText("List of available doctors: ");
+	this.button1.setText("Book Consultation");
+
+	this.frame.add(back);
+	this.frame.add(label1);
+	this.frame.add(label2);
+	this.frame.add(textField1);
+	this.frame.add(label3);
+	this.frame.add(scrollPane);
+	this.frame.add(confirm);
+	this.frame.add(result1);
     }
 
     public void pUpdate(JScrollPane scrollPane) {
@@ -618,17 +626,9 @@ public class View{
 	this.label4.setText("Sex: ");
 	this.label5.setText("Birthday (mm/dd/yyyy): ");
 	this.label6.setText("Phone Number: ");
-	this.label7.setText("Home Address: ");
-	this.label8.setText("Street: ");
-	this.label9.setText("City: ");
-	this.label10.setText("Province: ");
-	this.label11.setText("Postal Code: ");
-	this.label12.setText("Contact Person's Last Name: ");
-	this.label13.setText("Contact Person's First Name: ");
-	this.label14.setText("Contact Person's Phone Number: ");
-	this.label15.setText("Relationship with contact person: ");
-	this.label16.setText("Blood type: ");
-	this.label17.setText("Allergies: ");
+	this.label7.setText("Address: ");
+	this.label8.setText("Blood type: ");
+	this.label9.setText("Allergies: ");
 
 	this.radio1.setText("Male");
 	this.radio2.setText("Female");
@@ -650,26 +650,11 @@ public class View{
 	this.frame.add(label6);
 	this.frame.add(textField4);
 	this.frame.add(label7);
-	this.frame.add(label8);
 	this.frame.add(textField5);
-	this.frame.add(label9);
+	this.frame.add(label8);
 	this.frame.add(textField6);
-	this.frame.add(label10);
+	this.frame.add(label9);
 	this.frame.add(textField7);
-	this.frame.add(label11);
-	this.frame.add(textField8);
-	this.frame.add(label12);
-	this.frame.add(textField9);
-	this.frame.add(label13);
-	this.frame.add(textField10);
-	this.frame.add(label14);
-	this.frame.add(textField11);
-	this.frame.add(label15);
-	this.frame.add(textField12);
-	this.frame.add(label16);
-	this.frame.add(textField13);
-	this.frame.add(label17);
-	this.frame.add(textField14);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
@@ -1123,41 +1108,31 @@ public class View{
 	this.setMenu(6100);
 	this.label1.setText("Input laboratory data: ");
 	this.label2.setText("Laboratory name: ");
-	this.label3.setText("Home Address: ");
-	this.label4.setText("Street: ");
-	this.label5.setText("City: ");
-	this.label6.setText("Province: ");
-	this.label7.setText("Postal Code: ");
-	this.label8.setText("Phone Number: ");
+	this.label3.setText("Address: ");
+	this.label4.setText("Phone Number: ");
 
 	this.frame.add(back);
 	this.frame.add(label1);
 	this.frame.add(label2);
 	this.frame.add(textField1);
 	this.frame.add(label3);
-	this.frame.add(label4);
 	this.frame.add(textField2);
-	this.frame.add(label5);
+	this.frame.add(label4);
 	this.frame.add(textField3);
-	this.frame.add(label6);
-	this.frame.add(textField4);
-	this.frame.add(label7);
-	this.frame.add(textField5);
-	this.frame.add(label8);
-	this.frame.add(textField6);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
 
-    public void referLabEdit() {
+    public void referLabEdit(JScrollPane scrollPane) {
 	this.setMenu(6200);
 	this.label1.setText("Input laboratory ID: ");
 	this.label2.setText("List of laboratories: ");
 
 	this.frame.add(back);
 	this.frame.add(label1);
+	this.frame.add(textField1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
@@ -1192,13 +1167,12 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void referComp() {
+    public void referComp(JScrollPane scrollPane) {
 	this.setMenu(6300);
 	this.label1.setText("Input chief complaint data: ");
 	this.label2.setText("Description: ");
-	this.label3.setText("Category: ");
-	this.label4.setText("Recommended Specialization: ");
-	this.label5.setText("List of specializations: ");
+	this.label3.setText("Recommended Specialization: ");
+	this.label4.setText("List of specializations: ");
 
 	this.frame.add(back);
 	this.frame.add(label1);
@@ -1207,33 +1181,31 @@ public class View{
 	this.frame.add(label3);
 	this.frame.add(textField2);
 	this.frame.add(label4);
-	this.frame.add(textField3);
-	this.frame.add(label5);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
 
-    public void referCompEdit() {
+    public void referCompEdit(JScrollPane scrollPane) {
 	this.setMenu(6400);
 	this.label1.setText("Input chief complaint description: ");
 	this.label2.setText("List of chief complaints: ");
 
 	this.frame.add(back);
 	this.frame.add(label1);
+	this.frame.add(textField1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
 
-    public void referCompEditData() {
+    public void referCompEditData(JScrollPane scrollPane) {
 	this.setMenu(6410);
 	this.label1.setText("Edit chief complaint data: ");
 	this.label2.setText("Description: ");
-	this.label3.setText("Category: ");
-	this.label4.setText("Recommended Specialization: ");
-	this.label5.setText("List of specializations: ");
+	this.label3.setText("Recommended Specialization: ");
+	this.label4.setText("List of specializations: ");
 
 	this.frame.add(back);
 	this.frame.add(label1);
@@ -1242,9 +1214,7 @@ public class View{
 	this.frame.add(label3);
 	this.frame.add(textField2);
 	this.frame.add(label4);
-	this.frame.add(textField3);
-	this.frame.add(label5);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
@@ -1271,15 +1241,16 @@ public class View{
 	this.frame.add(result1);
     }
 
-    public void referMedEdit() {
+    public void referMedEdit(JScrollPane scrollPane) {
 	this.setMenu(6600);
 	this.label1.setText("Input medicine ID: ");
-	this.label2.setText("List of chief complaints: ");
+	this.label2.setText("List of medicines: ");
 
 	this.frame.add(back);
 	this.frame.add(label1);
+	this.frame.add(textField1);
 	this.frame.add(label2);
-	this.frame.add(scrollPane1);
+	this.frame.add(scrollPane);
 	this.frame.add(confirm);
 	this.frame.add(result1);
     }
