@@ -416,13 +416,14 @@ public class Controller{
 
 		    case 7100:
 			view.refresh();
-			view.reportConsultMonth(reports.monthlyPerformanceEvaluation(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+			view.reportConsultMonth(reports.monthlyPatientAccomodations(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));		
 			view.setVisible();
 			break;
 
+
 		    case 7200:
 			view.refresh();
-			view.reportHealthMonth(reports.monthlyPerformanceEvaluation(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+			view.reportHealthMonth(reports.monthlyHealthRiskReport(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
 			view.setVisible();
 			break;
 
@@ -434,7 +435,7 @@ public class Controller{
 
 		    case 7400:
 			view.refresh();
-			view.reportCommMonth(reports.monthlyPerformanceEvaluation(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+			view.reportCommMonth(reports.monthlyCommissionReport(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
 			view.setVisible();
 			break;			
 		}
@@ -519,13 +520,13 @@ public class Controller{
 
 		    case 7100:
 			view.refresh();
-			view.reportConsultYear(reports.YearlyPerformanceEvaluation(Integer.parseInt(view.getText2())));
+			view.reportConsultYear(reports.yearlyPatientAccomodations(Integer.parseInt(view.getText2())));
 			view.setVisible();
 			break;
 
 		    case 7200:
 			view.refresh();
-			view.reportHealthYear(reports.YearlyPerformanceEvaluation(Integer.parseInt(view.getText2())));
+			view.reportHealthYear(reports.yearlyHealthRiskReport(Integer.parseInt(view.getText2())));
 			view.setVisible();
 			break;
 
@@ -537,9 +538,9 @@ public class Controller{
 
 		    case 7400:
 			view.refresh();
-			view.reportCommYear(reports.YearlyPerformanceEvaluation(Integer.parseInt(view.getText2())));
+			view.reportCommYear(reports.yearlyCommissionReport(Integer.parseInt(view.getText2())));
 			view.setVisible();
-			break;		
+			break;
 		}
 
 	    }
