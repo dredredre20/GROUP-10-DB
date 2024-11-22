@@ -137,9 +137,32 @@ public class Controller{
 
 		switch(view.getMenu()) {
 		    case 1100: 
+			if (view.isButtonSelected(view.getRadio1())) {
+			    gender = "M";
+			} else {
+			    gender = "F";
+			}
+			view.setID(transactions.addPatient(view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5(), view.getText10()));
+			transactions.addPatientContact(view.getID(), view.getText6(), view.getText7(), view.getText8(), view.getText9());
+			view.refresh();
+			System.out.println(view.getID());
+			view.patientMenu();
+			view.setVisible();
+			break;
 		    case 1011:
+			transactions.addPatientContact(view.getID(), view.getText1(), view.getText2(), view.getText3(), view.getText4());
+			break;
 		    case 1012:
+			transactions.removePatientContact(view.getID(), view.getText1(), view.getText2());
+			break;
 		    case 1013:
+			if (view.isButtonSelected(view.getRadio1())) {
+			    gender = "M";
+			} else {
+			    gender = "F";
+			}
+			transactions.editPatient(view.getID(), view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5(), view.getText6(), view.getText7());
+			break;
 		    case 1020:
 		    case 2100:
 		    case 3110:
@@ -423,7 +446,7 @@ public class Controller{
 		    case 1010:
 			view.refresh();
 			view.setResult1("");
-		    	view.patientMenuEditRemoveC();
+		    	view.patientMenuEditRemoveC(transactions.viewRecord2("contactPerson", "patientID", view.getID()));
 			view.setVisible();
 			break;
 
