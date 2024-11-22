@@ -241,5 +241,136 @@ public class HMOReports {
             e.printStackTrace();
         }
     }
-    
+
+	
+    // monthly health risk report
+    public void monthlyHealthRiskReport(int year, int month){
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+            String query = "SELECT " + "p.gender, " + "d.diagnosisDescription, " + "d.severity " +
+                           "FROM patients p JOIN consultations c ON p.patientID = c.patientID " +
+                           "JOIN diagnosis d ON c.consultationID = d.diagnosisID " +
+                           "WHERE YEAR(c.consultationDate) = ? AND MONTH(c.consultationDate) = ?" +
+                           "GROUP BY YEAR(c.consultationDate) AND MONTH(c.consultationDate);"; // Select age, gender, medicine and previous diagnosis that may increase patient susceptibility
+
+            PreparedStatement access = connect.prepareStatement(query);
+
+            access.setInt(1, year);
+            access.setInt(2, month);
+            access.executeUpdate();
+            
+            access.close();
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+     // yearly health risk report
+    public void yearlyHealthRiskReport(int year){
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+            String query = "SELECT " + "p.gender, " + "d.diagnosisDescription, " + "d.severity " +
+                           "FROM patients p JOIN consultations c ON p.patientID = c.patientID " +
+                           "JOIN diagnosis d ON c.consultationID = d.diagnosisID " +
+                           "WHERE YEAR(c.consultationDate) = ?" +
+                           "GROUP BY YEAR(c.consultationDate);";
+
+            PreparedStatement access = connect.prepareStatement(query);
+
+            access.setInt(1, year);
+            access.executeUpdate();
+            
+            access.close();
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+     // monthly commission report
+    public void monthlyCommissionReport(int year, int month){
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+            String query = "SELECT " + "AVG(dw.salary), " + "ds.name" +
+                           "FROM doctors d JOIN doctorworkinfo dw ON d.doctorID = dw.doctorID" +
+                           "JOIN doctorspecializations ds ON d.doctorID = ds.doctorID" +
+                           "WHERE YEAR(c.consultationDate) = ? AND MONTH(c.consultationDate) = ?" +
+                           "GROUP BY YEAR(c.consultationDate) AND MONTH(c.consultationDate);";
+
+            PreparedStatement access = connect.prepareStatement(query);
+
+            access.setInt(1, year);
+            access.setInt(2, month);
+            access.executeUpdate();
+            
+            access.close();
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
+
+     // yearly commission report
+    public void yearlyCommissionReport(int year){
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+            String query = "SELECT " + "AVG(dw.salary), " + "ds.name" +
+                           "FROM doctors d JOIN doctorworkinfo dw ON d.doctorID = dw.doctorID" +
+                           "JOIN doctorspecializations ds ON d.doctorID = ds.doctorID" +
+                           "WHERE YEAR(c.consultationDate) = ?" +
+                           "GROUP BY YEAR(c.consultationDate);";
+
+            PreparedStatement access = connect.prepareStatement(query);
+
+            access.setInt(1, year);
+            access.executeUpdate();
+            
+            access.close();
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+    }
 }
