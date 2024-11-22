@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `doctorWorkInfo`;
 CREATE TABLE `doctorWorkInfo`(
 	`doctorID` int(10) NOT NULL,
 	`salary` int(10) NOT NULL,
-    `licenseNumber` int(8) NOT NULL,
+    `licenseNumber` int(20) NOT NULL,
 	`workingStart` int(4) DEFAULT NULL,
 	`workingEnd` int(4) DEFAULT NULL,
     `maxPatientLoad` int(2) NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE `patients` (
     `lastName` varchar(50) NOT NULL, 
     `phoneNumber` varchar(50) NOT NULL,
     `relationship` varchar(50) DEFAULT NULL,
-	PRIMARY KEY (`patientID`),
+	PRIMARY KEY (`patientID`, `firstName`, `lastName`),
     FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`)
   );
   
@@ -149,10 +149,3 @@ DROP TABLE IF EXISTS `medicine`;
 	FOREIGN KEY (`consultationID`) REFERENCES `consultations` (`consultationID`),
 	FOREIGN KEY (`medicineID`) REFERENCES `medicine` (`medicineID`)
   );
-  
-  
-  
-  
-  
-  
-
