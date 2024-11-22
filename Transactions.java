@@ -820,24 +820,25 @@ public class Transactions {
     }
 
      // book consultation
-    public void bookAppointment(Timestamp from, Timestamp to, String complaint, int doctorID){
+    public void bookAppointment(int patientID, int doctorID, Timestamp consultDate){
+
+        // since patient will only be signing up, no need to add rating, start, and end date yet. Should be updated after 
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-            String query = "INSERT INTO consultations (consultationID, patientID, doctorID, consultationDate, satisfactionRating, startDate, endDate)" +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO consultations (consultationID, patientID, doctorID, consultationDate)" +
+                            "VALUES (?, ?, ?, ?)";
 	    PreparedStatement insert = connect.prepareStatement(query);
 		
-	    insert.setNull(1,0); // not final
-        insert.setNull(2,0); // not final
-        insert.setNull(3,0); // not final
-	    insert.setNull(4, 0); // not final
-	    insert.setNull(5, 0); // not final
-	    insert.setTimestamp(6, from);
-	    insert.setTimestamp(7, to);
+	    insert.setNull(1,0); //consultationID
+        insert.setInt (2, patientID); // patientID
+        insert.setInt (3, doctorID); // doctorID
+	    insert.setTimestamp(4, consultDate); // consultation date
             insert.executeUpdate();
 	    insert.close();
 
+        
 	} catch (ClassNotFoundException e) {
             System.err.println("MySQL JDBC Driver not found.");
             System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
@@ -850,4 +851,53 @@ public class Transactions {
             e.printStackTrace();
         }
     }
+
+
+    public boolean patientID(int ID) {
+        try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+                String statement = "SELECT * FROM patients WHERE patientID = " + ID;
+                connect.createStatement().executeQuery(statement);
+    
+        } catch (ClassNotFoundException e) {
+                System.err.println("MySQL JDBC Driver not found.");
+                System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+                e.printStackTrace();
+                
+            } catch (SQLException e) {
+                System.err.println("Database connection error:");
+                System.err.println("Error Code: " + e.getErrorCode());
+                System.err.println("SQL State: " + e.getSQLState());
+                e.printStackTrace();
+            return false;
+            }
+        return true;
+    }
+
+
+    public String patientAttribute(String attribute, int ID) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+            ResultSet result = connect.createStatement().executeQuery("SELECT " + attribute + " FROM patients WHERE doctorID = " + ID);
+            String selection = "";
+            while (result.next())
+            selection = (String) result.getObject(1).toString();
+            if (selection != "")
+            return selection;
+    
+        } catch (ClassNotFoundException e) {
+                System.err.println("MySQL JDBC Driver not found.");
+                System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+                e.printStackTrace();
+                
+            } catch (SQLException e) {
+                System.err.println("Database connection error:");
+                System.err.println("Error Code: " + e.getErrorCode());
+                System.err.println("SQL State: " + e.getSQLState());
+                e.printStackTrace();
+            }
+            return "";
+        }
 }
