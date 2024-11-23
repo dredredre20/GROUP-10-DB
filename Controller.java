@@ -245,7 +245,7 @@ public class Controller{
 			    gender = "F";
 			}
 			view.setID(transactions.addDoctor(view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5(), view.getText6()));
-			transactions.addDoctorWork(view.getID(), Integer.parseInt(view.getText7()), Integer.parseInt(view.getText8()), Integer.parseInt(view.getText9()), Integer.parseInt(view.getText10()), Integer.parseInt(view.getText11()));
+			transactions.addDoctorWork(view.getID(), Integer.parseInt(view.getText7()), view.getText8(), Integer.parseInt(view.getText9()), Integer.parseInt(view.getText10()), Integer.parseInt(view.getText11()));
 			view.refresh();
 			System.out.println(view.getID());
 			view.doctorMenu();
@@ -264,7 +264,7 @@ public class Controller{
 			    gender = "F";
 			}
 			transactions.editDoctor(view.getID(), view.getText1(), view.getText2(), gender, Timestamp.valueOf(LocalDate.parse(view.getText3(), mdy).atStartOfDay()), view.getText4(), view.getText5(), view.getText6());
-			transactions.editDoctorWork(view.getID(), Integer.parseInt(view.getText7()), Integer.parseInt(view.getText8()), Integer.parseInt(view.getText9()), Integer.parseInt(view.getText10()), Integer.parseInt(view.getText11()));
+			transactions.editDoctorWork(view.getID(), Integer.parseInt(view.getText7()), view.getText8(), Integer.parseInt(view.getText9()), Integer.parseInt(view.getText10()), Integer.parseInt(view.getText11()));
 			view.setResult1("Edit success");
 			break;
 		    case 6100:
