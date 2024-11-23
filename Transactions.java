@@ -329,7 +329,7 @@ public class Transactions {
 	return true;
     }    
 
-    public void addDoctorWork(int ID, int salary, int licenseNumber, int startTime, int endTime, int max) {
+    public void addDoctorWork(int ID, int salary, String licenseNumber, int startTime, int endTime, int max) {
 	try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
@@ -339,7 +339,7 @@ public class Transactions {
 		
 	    insert.setInt(1,ID);
 	    insert.setInt(2, salary);
-	    insert.setInt(3, licenseNumber);
+	    insert.setString(3, licenseNumber);
 	    insert.setInt(4, startTime);
 	    insert.setInt(5, endTime);
 	    insert.setInt(6, max);
@@ -360,7 +360,7 @@ public class Transactions {
         }
     }
 
-    public void editDoctorWork(int ID, int salary, int licenseNumber, int startTime, int endTime, int max) {
+    public void editDoctorWork(int ID, int salary, String licenseNumber, int startTime, int endTime, int max) {
 	try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
