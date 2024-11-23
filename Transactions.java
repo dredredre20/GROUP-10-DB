@@ -4,6 +4,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class Transactions {
 
@@ -847,19 +848,20 @@ public class Transactions {
         }
     }
      // book consultation
-    public void bookAppointment(int patientID, int doctorID, Timestamp consultDate){
+    public void bookAppointment(int patientID, int doctorID, Timestamp start, Timestamp end){
         // since patient will only be signing up, no need to add rating, start, and end date yet. Should be updated after 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-            String query = "INSERT INTO consultations (consultationID, patientID, doctorID, consultationDate)" +
-                            "VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO consultations (consultationID, patientID, doctorID, startDate, endDate)" +
+                            "VALUES (?, ?, ?, ?, ?)";
 	    PreparedStatement insert = connect.prepareStatement(query);
 		
 	    insert.setNull(1,0); //consultationID
-        insert.setInt (2, patientID); // patientID
-        insert.setInt (3, doctorID); // doctorID
-	    insert.setTimestamp(4, consultDate); // consultation date
+            insert.setInt (2, patientID); // patientID
+            insert.setInt (3, doctorID); // doctorID
+	    insert.setTimestamp(4, start); // consultation date
+	    insert.setTimestamp(5, end); // consultation date
             insert.executeUpdate();
 	    insert.close();
         
@@ -930,10 +932,12 @@ public class Transactions {
 	Vector rows = new Vector();
 	int start = startTime.getHour() * 100 + startTime.getMinute();
 	int end = endTime.getHour() * 100 + endTime.getMinute();
+	Timestamp startDate = Timestamp.valueOf(startTime);
+	Timestamp endDate = Timestamp.valueOf(endTime);
 	try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT d.* FROM doctors d JOIN doctorSpecializations s ON d.doctorID = s.doctorID JOIN doctorWorkInfo i ON d.doctorID = i.doctorID WHERE i.workingStart >= "+start+" AND i.workingStart < "+end+" AND i.workingEnd >= "+start+" AND i.workingEnd < "+end+" AND s.field = '" + complaint + "'");
+	    ResultSet result = connect.createStatement().executeQuery("SELECT d.* FROM doctors d JOIN doctorSpecializations s ON d.doctorID = s.doctorID JOIN doctorWorkInfo i ON d.doctorID = i.doctorID JOIN consultations c on c.doctorID = d.doctorID WHERE i.workingStart >= "+start+" AND i.workingStart < "+end+" AND i.workingEnd >= "+start+" AND i.workingEnd < "+end+" AND s.field = '" + complaint + "' AND (c.startDate > "+endDate+" OR c.endDate > "+startDate+")");
 	    int records = result.getMetaData().getColumnCount();
 	    if (records == 0)
 		return null;
@@ -964,6 +968,35 @@ public class Transactions {
             e.printStackTrace();
         }
 	    return null;
+    }    
+
+    public boolean isDoctorAvailable(LocalDateTime startTime, LocalDateTime endTime, String complaint, int ID) {
+	Vector columns = new Vector();
+	Vector rows = new Vector();
+	int start = startTime.getHour() * 100 + startTime.getMinute();
+	int end = endTime.getHour() * 100 + endTime.getMinute();
+	Timestamp startDate = Timestamp.valueOf(startTime);
+	Timestamp endDate = Timestamp.valueOf(endTime);
+	try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
+	    ResultSet result = connect.createStatement().executeQuery("SELECT d.* FROM doctors d JOIN doctorSpecializations s ON d.doctorID = s.doctorID JOIN doctorWorkInfo i ON d.doctorID = i.doctorID JOIN consultations c on c.doctorID = d.doctorID WHERE i.workingStart >= "+start+" AND i.workingStart < "+end+" AND i.workingEnd >= "+start+" AND i.workingEnd < "+end+" AND s.field = '" + complaint + "' AND (c.startDate > "+endDate+" OR c.endDate > "+startDate+") AND d.doctorID = "+ID);
+	    int records = result.getMetaData().getColumnCount();
+	    if (records == 0)
+		return false;
+	    return true;
+	} catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            System.err.println("Make sure mysql-connector-j-9.1.0.jar is in your classpath");
+            e.printStackTrace();
+            
+        } catch (SQLException e) {
+            System.err.println("Database connection error:");
+            System.err.println("Error Code: " + e.getErrorCode());
+            System.err.println("SQL State: " + e.getSQLState());
+            e.printStackTrace();
+        }
+	    return false;
     }    
 
     public boolean findID(String ID, String record, String IDName) {
