@@ -160,48 +160,54 @@ public class PopulateDoctor {
             // doctor specialization
             Object[][] doctorSpecial = {
                     // example data
-                    { 3001, "Internal Medicine", "Cardiology", "2015-06-01 00:00:00", "2025-06-01 00:00:00" },
-                    { 3002, "Pediatrics", "General Pediatrics", "2016-07-15 00:00:00", "2026-07-15 00:00:00" },
-                    { 3003, "Surgery", "Orthopedic Surgery", "2014-10-20 00:00:00", "2024-10-20 00:00:00" },
-                    { 3004, "Obstetrics and Gynecology", "Gynecologic Surgery", "2017-04-10 00:00:00",
+                { 3001, "Cardiologist", "Cardiology", "2015-06-01 00:00:00", "2025-06-01 00:00:00" },
+                    { 3002, "Pediatrician", "General Pediatrics", "2016-07-15 00:00:00", "2026-07-15 00:00:00" },
+                    { 3003, "Surgeon", "Orthopedic Surgery", "2014-10-20 00:00:00", "2024-10-20 00:00:00" },
+                    { 3004, "Obstetrician", "Gynecologic Surgery", "2017-04-10 00:00:00",
                     "2027-04-10 00:00:00" },
-                    { 3005, "Internal Medicine", "Endocrinology", "2018-05-12 00:00:00", "2028-05-12 00:00:00" },
-                    { 3006, "Pediatrics", "Neonatology", "2015-09-25 00:00:00", "2025-09-25 00:00:00" },
-                    { 3007, "Ophthalmology", "Retina and Vitreous Surgery", "2016-12-30 00:00:00",
+                    { 3005, "Endocrinologist", "Endocrinology", "2018-05-12 00:00:00", "2028-05-12 00:00:00" },
+
+                    { 3006, "Pediatrician", "Neonatology", "2015-09-25 00:00:00", "2025-09-25 00:00:00" },
+                    { 3007, "Ophthalmologist", "Retina and Vitreous Surgery", "2016-12-30 00:00:00",
                     "2026-12-30 00:00:00" },
-                    { 3008, "Surgery", "Plastic Surgery", "2014-03-11 00:00:00", "2024-03-11 00:00:00" },
-                    { 3009, "Dermatology", "Dermatologic Surgery", "2013-08-07 00:00:00", "2023-08-07 00:00:00" },
-                    { 3010, "Family Medicine", "General Family Medicine", "2016-11-02 00:00:00",
+                    { 3008, "Surgeon", "Plastic Surgery", "2014-03-11 00:00:00", "2024-03-11 00:00:00" },
+                    { 3009, "Dermatologist", "Dermatologic Surgery", "2013-08-07 00:00:00", "2023-08-07 00:00:00" },
+                    { 3010, "Physician", "General Family Medicine", "2016-11-02 00:00:00",
+
                     "2026-11-02 00:00:00" },
-                    { 3011, "Psychiatry", "General Psychiatry", "2014-01-17 00:00:00", "2024-01-17 00:00:00" },
-                    { 3012, "Anesthesiology", "General Anesthesiology", "2017-02-14 00:00:00",
+                    { 3011, "Psychiatrist", "General Psychiatry", "2014-01-17 00:00:00", "2024-01-17 00:00:00" },
+                    { 3012, "Anesthesiologist", "General Anesthesiology", "2017-02-14 00:00:00",
                     "2027-02-14 00:00:00" },
-                    { 3013, "Emergency Medicine", "Trauma and Emergency Care", "2018-03-05 00:00:00",
+                    { 3013, "Physician", "Trauma and Emergency Care", "2018-03-05 00:00:00",
                     "2028-03-05 00:00:00" },
-                    { 3014, "Orthopedics", "Spine Surgery", "2013-10-22 00:00:00", "2023-10-22 00:00:00" },
-                    { 3015, "Urology", "General Urology", "2016-09-08 00:00:00", "2026-09-08 00:00:00" },
-                    { 3016, "Plastic Surgery", "Reconstructive Surgery", "2015-12-15 00:00:00",
+                    { 3014, "Orthopedist", "Spine Surgery", "2013-10-22 00:00:00", "2023-10-22 00:00:00" },
+                    { 3015, "Urologist", "General Urology", "2016-09-08 00:00:00", "2026-09-08 00:00:00" },
+
+
+                    { 3016, "Dermatologist", "Reconstructive Surgery", "2015-12-15 00:00:00",
                     "2025-12-15 00:00:00" },
-                    { 3017, "Otorhinolaryngology", "Head and Neck Surgery", "2018-01-09 00:00:00",
+                    { 3017, "Otorhinolaryngologist", "Head and Neck Surgery", "2018-01-09 00:00:00",
                     "2028-01-09 00:00:00" },
-                    { 3018, "Internal Medicine", "Gastroenterology", "2017-08-19 00:00:00", "2027-08-19 00:00:00" },
-                    { 3019, "Neurology", "Stroke Neurology", "2014-04-03 00:00:00", "2024-04-03 00:00:00" },
-                    { 3020, "Dermatology", "Cosmetic Dermatology", "2015-11-25 00:00:00", "2025-11-25 00:00:00" },
-                    { 3021, "Pediatrics", "Pediatric Cardiology", "2016-06-12 00:00:00", "2026-06-12 00:00:00" },
-                    { 3022, "Surgery", "General Surgery", "2014-05-17 00:00:00", "2024-05-17 00:00:00" },
-                    { 3023, "Obstetrics and Gynecology", "Maternal-Fetal Medicine", "2016-10-22 00:00:00",
+                    { 3018, "Gastroenterologist", "Gastroenterology", "2017-08-19 00:00:00", "2027-08-19 00:00:00" },
+                    { 3019, "Neurologist", "Stroke Neurology", "2014-04-03 00:00:00", "2024-04-03 00:00:00" },
+
+
+                    { 3020, "Dermatologist", "Cosmetic Dermatology", "2015-11-25 00:00:00", "2025-11-25 00:00:00" },
+                    { 3021, "Pediatrician", "Pediatric Cardiology", "2016-06-12 00:00:00", "2026-06-12 00:00:00" },
+                    { 3022, "Surgeon", "General Surgery", "2014-05-17 00:00:00", "2024-05-17 00:00:00" },
+                    { 3023, "Obstetrician", "Maternal-Fetal Medicine", "2016-10-22 00:00:00",
                     "2026-10-22 00:00:00" },
-                    { 3024, "Psychiatry", "Child and Adolescent Psychiatry", "2018-07-11 00:00:00",
+                    { 3024, "Psychiatrist", "Child and Adolescent Psychiatry", "2018-07-11 00:00:00",
                     "2028-07-11 00:00:00" },
-                    { 3025, "Ophthalmology", "Cataract Surgery", "2017-09-14 00:00:00", "2027-09-14 00:00:00" }, 
+                    { 3025, "Ophthalmologist", "Cataract Surgery", "2017-09-14 00:00:00", "2027-09-14 00:00:00" }, 
 
 
 
-                    { 3026, "Cardiology", "Interventional Cardiology", "2016-08-15 00:00:00", "2026-08-15 00:00:00" },
-                    { 3027, "Pulmonology", "Critical Care Medicine", "2017-03-22 00:00:00", "2027-03-22 00:00:00" },
-                    { 3028, "Nephrology", "Transplant Nephrology", "2015-11-30 00:00:00", "2025-11-30 00:00:00" },
-                    { 3029, "Hematology", "Medical Oncology", "2016-09-14 00:00:00", "2026-09-14 00:00:00" },
-                    { 3030, "Rheumatology", "Pediatric Rheumatology", "2017-07-19 00:00:00", "2027-07-19 00:00:00" }
+                    { 3026, "Cardiologist", "Interventional Cardiology", "2016-08-15 00:00:00", "2026-08-15 00:00:00" },
+                    { 3027, "Pulmonologist", "Critical Care Medicine", "2017-03-22 00:00:00", "2027-03-22 00:00:00" },
+                    { 3028, "Nephrologist", "Transplant Nephrology", "2015-11-30 00:00:00", "2025-11-30 00:00:00" },
+                    { 3029, "Hematologist", "Medical Oncology", "2016-09-14 00:00:00", "2026-09-14 00:00:00" },
+                    { 3030, "Rheumatologist", "Pediatric Rheumatology", "2017-07-19 00:00:00", "2027-07-19 00:00:00" }
             };
 
             String query2 = "INSERT INTO doctorSpecializations (doctorID, name, field, certificateDate, expiryDate)" +
