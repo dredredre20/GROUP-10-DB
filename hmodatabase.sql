@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS `doctorWorkInfo`;
 CREATE TABLE `doctorWorkInfo`(
 	`doctorID` int(10) NOT NULL,
 	`salary` int(10) NOT NULL,
-    `licenseNumber` int(20) NOT NULL,
+    `licenseNumber` varchar(8) NOT NULL,
 	`workingStart` int(4) DEFAULT NULL,
 	`workingEnd` int(4) DEFAULT NULL,
     `maxPatientLoad` int(2) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `doctorSpecializations`(
 	`field` varchar(50) NOT NULL,
     `certificateDate` date NOT NULL,
     `expiryDate` date NOT NULL,
-    PRIMARY KEY (`doctorID`, `name`),
+    PRIMARY KEY (`doctorID`),
     FOREIGN KEY (`doctorID`) REFERENCES `doctors` (`doctorID`)
 );
   
@@ -49,7 +49,7 @@ CREATE TABLE `patients` (
   `birthday` datetime NOT NULL,
   `phoneNumber` varchar(50) NOT NULL,
   `address` varchar(150) NOT NULL,
-  `bloodType` varchar(2) NOT NULL,
+  `bloodType` varchar(4) NOT NULL,
   `allergies` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`patientID`)
   );
@@ -61,7 +61,7 @@ CREATE TABLE `patients` (
     `lastName` varchar(50) NOT NULL, 
     `phoneNumber` varchar(50) NOT NULL,
     `relationship` varchar(50) DEFAULT NULL,
-	PRIMARY KEY (`patientID`, `firstName`, `lastName`),
+	PRIMARY KEY (`patientID`),
     FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`)
   );
   
@@ -149,3 +149,9 @@ DROP TABLE IF EXISTS `medicine`;
 	FOREIGN KEY (`consultationID`) REFERENCES `consultations` (`consultationID`),
 	FOREIGN KEY (`medicineID`) REFERENCES `medicine` (`medicineID`)
   );
+  
+  
+  
+  
+  
+  
