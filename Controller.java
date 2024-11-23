@@ -465,26 +465,45 @@ public class Controller{
 			break;
 
 		    case 7100:
-			view.refresh();
-			view.reportConsultMonth(reports.monthlyPatientAccomodations(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));					view.setVisible();
+				view.refresh();
+				try {
+					view.reportConsultMonth(reports.monthlyPatientAccomodations(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));					
+
+				} catch (Exception e4){
+					view.setResult1("No reports to be found.");
+				}
+				view.setVisible();
 			break;
 
-		    case 7200:
-			view.refresh();
-			view.reportHealthMonth(reports.monthlyHealthRiskReport(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+			case 7200:
+				view.refresh();
+
+				try {
+					view.reportHealthMonth(reports.monthlyHealthRiskReport(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+				} catch (Exception e5) {
+					view.setResult1("No reports to be found.");
+				}
 			view.setVisible();
 			break;
 
 		    case 7300:
-			view.refresh();
-			view.reportPerfMonth(reports.monthlyPerformanceEvaluation(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
-			view.setVisible();
+				view.refresh();
+				try {
+					view.reportPerfMonth(reports.monthlyPerformanceEvaluation(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+				} catch (Exception e6) {
+					view.setResult1("No reports to be found.");
+				}
+				view.setVisible();
 			break;
 
 		    case 7400:
-			view.refresh();
-			view.reportCommMonth(reports.monthlyCommissionReport(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
-			view.setVisible();
+				view.refresh();
+				try {
+					view.reportCommMonth(reports.monthlyCommissionReport(Integer.parseInt(view.getText2()), Integer.parseInt(view.getText1())));
+				} catch (Exception e7) {
+					view.setResult1("No reports to be found.");
+				}
+				view.setVisible();
 			break;			
 		}
 
@@ -566,29 +585,49 @@ public class Controller{
 			view.setVisible();
 			break;
 
-		    case 7100:
-			view.refresh();
-			view.reportConsultYear(reports.yearlyPatientAccomodations(Integer.parseInt(view.getText2())));
-			view.setVisible();
+		   case 7100:
+				view.refresh();
+
+				try {
+					view.reportConsultYear(reports.yearlyPatientAccomodations(Integer.parseInt(view.getText2())));
+				} catch (Exception e2) {
+					view.setResult1("No reports to be found.");
+				}
+
+				view.setVisible();
 			break;
 
 		    case 7200:
-			view.refresh();
-			view.reportHealthYear(reports.yearlyHealthRiskReport(Integer.parseInt(view.getText2())));
-			view.setVisible();
+				view.refresh();
+
+				try {
+					view.reportHealthYear(reports.yearlyHealthRiskReport(Integer.parseInt(view.getText2())));
+				} catch (Exception e7) {
+					view.setResult1("No reports to be found.");
+				}
+				view.setVisible();
+
 			break;
 
 		    case 7300:
-			view.refresh();
-			view.reportPerfYear(reports.YearlyPerformanceEvaluation(Integer.parseInt(view.getText2())));
-			view.setVisible();
+				view.refresh();
+				try {
+					view.reportPerfYear(reports.YearlyPerformanceEvaluation(Integer.parseInt(view.getText2())));
+				} catch (Exception e7) {
+					view.setResult1("No reports to be found.");
+				}
+				view.setVisible();
 			break;
 
 		    case 7400:
-			view.refresh();
-			view.reportCommYear(reports.yearlyCommissionReport(Integer.parseInt(view.getText2())));
-			view.setVisible();
-			break;		
+				view.refresh();
+				try {
+					view.reportCommYear(reports.yearlyCommissionReport(Integer.parseInt(view.getText2())));
+				} catch (Exception e7) {
+					view.setResult1("No reports to be found.");
+				}	
+				view.setVisible();
+			break;	
 		}
 
 	    }
