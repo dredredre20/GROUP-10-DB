@@ -766,7 +766,7 @@ public class View{
 	this.label2.setText("List of medicines: ");
 	this.label3.setText("Input dosage: ");
 	this.label4.setText("Input frequency: ");
-	this.label5.setText("Input start and end dates (mm/dd/yyyy): ");
+	this.label5.setText("Input start and end dates (mm/dd/yyyy hh:mm): ");
 	this.label6.setText("From ");
 	this.label7.setText("To ");
 	this.label8.setText("Input notes: ");
