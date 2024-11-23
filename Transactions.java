@@ -4,7 +4,6 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import java.time.LocalDateTime;
-import java.sql.Timestamp;
 
 public class Transactions {
 
@@ -937,7 +936,7 @@ public class Transactions {
 	try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT d.* FROM doctors d JOIN doctorSpecializations s ON d.doctorID = s.doctorID JOIN doctorWorkInfo i ON d.doctorID = i.doctorID JOIN consultations c on c.doctorID = d.doctorID WHERE i.workingStart >= "+start+" AND i.workingStart < "+end+" AND i.workingEnd >= "+start+" AND i.workingEnd < "+end+" AND s.field = '" + complaint + "' AND (c.startDate > "+endDate+" OR c.endDate > "+startDate+")");
+	    ResultSet result = connect.createStatement().executeQuery("SELECT d.* FROM doctors d JOIN doctorSpecializations s ON d.doctorID = s.doctorID JOIN doctorWorkInfo i ON d.doctorID = i.doctorID JOIN consultations c on c.doctorID = d.doctorID WHERE (i.workingStart >= "+start+" OR i.workingStart < "+end+") AND (i.workingEnd >= "+start+" OR i.workingEnd < "+end+") AND s.name = '" + complaint + "' AND (c.startDate > '"+endDate+"' OR c.endDate > '"+startDate+"')");
 	    int records = result.getMetaData().getColumnCount();
 	    if (records == 0)
 		return null;
@@ -945,8 +944,9 @@ public class Transactions {
 		columns.addElement(result.getMetaData().getColumnName(i));
 	    while (result.next()) {
 		Vector row = new Vector(records);
-		for(int i=1; i<=records; i++)
+		for(int i=1; i<=records; i++) {
 		    row.addElement(result.getObject(i));
+ 		}
 	  	rows.addElement(row);
 	    }
 	    JTable table = new JTable(rows, columns);
@@ -980,7 +980,7 @@ public class Transactions {
 	try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-	    ResultSet result = connect.createStatement().executeQuery("SELECT d.* FROM doctors d JOIN doctorSpecializations s ON d.doctorID = s.doctorID JOIN doctorWorkInfo i ON d.doctorID = i.doctorID JOIN consultations c on c.doctorID = d.doctorID WHERE i.workingStart >= "+start+" AND i.workingStart < "+end+" AND i.workingEnd >= "+start+" AND i.workingEnd < "+end+" AND s.field = '" + complaint + "' AND (c.startDate > "+endDate+" OR c.endDate > "+startDate+") AND d.doctorID = "+ID);
+	    ResultSet result = connect.createStatement().executeQuery("SELECT d.* FROM doctors d JOIN doctorSpecializations s ON d.doctorID = s.doctorID JOIN doctorWorkInfo i ON d.doctorID = i.doctorID JOIN consultations c on c.doctorID = d.doctorID WHERE i.workingStart >= "+start+" AND i.workingStart < "+end+" AND i.workingEnd >= "+start+" AND i.workingEnd < "+end+" AND s.field = '" + complaint + "' AND (c.startDate > '"+endDate+"' OR c.endDate > '"+startDate+"') AND d.doctorID = "+ID);
 	    int records = result.getMetaData().getColumnCount();
 	    if (records == 0)
 		return false;
