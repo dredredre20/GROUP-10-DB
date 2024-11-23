@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Controller{
     private View view;
-    private Model model;
     private Transactions transactions;
     private HMOReports reports;
 
@@ -16,9 +15,8 @@ public class Controller{
 	return this.view;
     }
 
-    public Controller(View view, Model model, Transactions transactions, HMOReports reports) {
+    public Controller(View view, Transactions transactions, HMOReports reports) {
 	this.view = view;
-	this.model = model;
 	this.transactions = transactions;
 	this.reports = reports;
 
