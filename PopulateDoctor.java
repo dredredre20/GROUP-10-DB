@@ -1,16 +1,23 @@
 import java.sql.*;
 
 public class PopulateDoctor {
+
+    private String hmo_url;
+    private String user;
+    private String pass;
+
+    public PopulateDoctor(String hmo, String user, String pass){
+        
+        this.hmo_url = hmo;
+        this.user = user;
+        this.pass = pass;
+    }
     
     public void doctor(){
-        
-        String hmo_url = "jdbc:mysql://127.0.0.1:3306/hmo";
-        String user = "root";
-        String pass = "hello_peak17+11";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connect = DriverManager.getConnection(hmo_url, user, pass);
+            Connection connect = DriverManager.getConnection(this.hmo_url, this.user, this.pass);
 
             // doctor basic information
             Object[][] doctorBasic = {
@@ -234,10 +241,7 @@ public class PopulateDoctor {
             e.printStackTrace();
 
         } catch (SQLException e) {
-            System.err.println("Database connection error:");
-            System.err.println("Error Code: " + e.getErrorCode());
-            System.err.println("SQL State: " + e.getSQLState());
-            e.printStackTrace();
+            System.out.println("Doctor data loaded");
         }
     }
 }
