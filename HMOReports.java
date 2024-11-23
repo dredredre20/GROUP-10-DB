@@ -308,16 +308,17 @@ public class HMOReports {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-            String query = "SELECT YEAR(c.consultationDate) as year, MONTH(c.consultationDate) as month" + 
+            String query = "SELECT YEAR(c.consultationDate) as year, MONTH(c.consultationDate) as month, " + 
                             "p.sex, " + 
-                            "TIMESTAMPDIFF(YEAR, p.birthday, c.consultationDate) as age" + 
+                            "TIMESTAMPDIFF(YEAR, p.birthday, c.consultationDate) as age, " + 
                             "d.diagnosisDescription, " + 
-                            "d.severity " + 
-                            "COUNT(d.diagnosisDescription) AS diagnosis_count" + 
-                            "FROM patients p JOIN consultations c ON p.patientID = c.patientID " +
+                            "d.severity, " + 
+                            "COUNT(d.diagnosisDescription) AS diagnosis_count " + 
+                            "FROM patients p " +
+                            "JOIN consultations c ON p.patientID = c.patientID " +
                             "JOIN diagnosis d ON c.consultationID = d.consultationID " +
-                            "WHERE YEAR(c.consultationDate) = ? AND MONTH(c.consultationDate) = ?" +
-                            "GROUP BY YEAR(c.consultationDate), MONTH(c.consultationDate), p.sex, age, d.diagnosisDescription, d.severity" + 
+                            "WHERE YEAR(c.consultationDate) = ? AND MONTH(c.consultationDate) = ? " +
+                            "GROUP BY YEAR(c.consultationDate), MONTH(c.consultationDate), p.sex, age, d.diagnosisDescription, d.severity " + 
                             "ORDER BY year, month, diagnosis_count DESC;"; 
                            
                            // Select age, gender, medicine and previous diagnosis that may increase patient susceptibility
@@ -327,8 +328,6 @@ public class HMOReports {
             access.setInt(1, year);
             access.setInt(2, month);
             ResultSet result = access.executeQuery();            
-            access.close();
-
 
             int records = result.getMetaData().getColumnCount();
 	        for(int i=1; i<=records; i++)
@@ -348,7 +347,8 @@ public class HMOReports {
 	        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
 	        scrollPane.setPreferredSize(new Dimension(800, 800));
 
-            
+            access.close();
+
 	        return scrollPane;
 
         } catch (ClassNotFoundException e) {
@@ -377,21 +377,21 @@ public class HMOReports {
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
             String query = "SELECT YEAR(c.consultationDate) as year, " + 
                             "p.sex, " + 
-                            "TIMESTAMPDIFF(YEAR, p.birthday, c.consultationDate) as age" + 
+                            "TIMESTAMPDIFF(YEAR, p.birthday, c.consultationDate) as age, " + 
                             "d.diagnosisDescription, " + 
-                            "d.severity " + 
-                            "COUNT(d.diagnosisDescription) AS diagnosis_count" + 
-                            "FROM patients p JOIN consultations c ON p.patientID = c.patientID " +
+                            "d.severity, " + 
+                            "COUNT(d.diagnosisDescription) AS diagnosis_count " + 
+                            "FROM patients p " +
+                            "JOIN consultations c ON p.patientID = c.patientID " +
                             "JOIN diagnosis d ON c.consultationID = d.consultationID " +
                             "WHERE YEAR(c.consultationDate) = ? " +
-                            "GROUP BY YEAR(c.consultationDate), p.sex, age, d.diagnosisDescription, d.severity" + 
-                            "ORDER BY year,  diagnosis_count DESC;";
+                            "GROUP BY YEAR(c.consultationDate), p.sex, age, d.diagnosisDescription, d.severity " + 
+                            "ORDER BY year, diagnosis_count DESC;";
 
             PreparedStatement access = connect.prepareStatement(query);
 
             access.setInt(1, year);
             ResultSet result = access.executeQuery();            
-            access.close();
 
             int records = result.getMetaData().getColumnCount();
 	        for(int i=1; i<=records; i++)
@@ -411,8 +411,10 @@ public class HMOReports {
 	        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
 	        scrollPane.setPreferredSize(new Dimension(800, 800));
 
-            
+            access.close();
 	        return scrollPane;
+            
+            
 
         } catch (ClassNotFoundException e) {
             System.err.println("MySQL JDBC Driver not found.");
@@ -427,6 +429,7 @@ public class HMOReports {
         }
 
         return null;
+        
     }
 
 
@@ -439,19 +442,20 @@ public class HMOReports {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-            String query = "SELECT " + "AVG(dw.salary), " + "ds.name" +
-                           "FROM doctors d JOIN doctorworkinfo dw ON d.doctorID = dw.doctorID" +
-                           "JOIN doctorspecializations ds ON d.doctorID = ds.doctorID" +
-                           "WHERE YEAR(c.consultationDate) = ? AND MONTH(c.consultationDate) = ?" +
-                           "GROUP BY YEAR(c.consultationDate) AND MONTH(c.consultationDate);";
+            String query = "SELECT " + "AVG(dw.salary) AS average_salary, ds.name, ds.field " +
+                           "FROM doctors d " + 
+                           "JOIN doctorWorkInfo dw ON d.doctorID = dw.doctorID " +
+                           "JOIN doctorSpecializations ds ON d.doctorID = ds.doctorID " + 
+                           "JOIN consultations c ON d.doctorID = c.doctorID " + 
+                           "WHERE YEAR(c.consultationDate) = ? AND MONTH(c.consultationDate) = ? " +
+                           "GROUP BY ds.name, ds.field " +
+                           "ORDER BY ds.name, average_salary DESC; ";
 
             PreparedStatement access = connect.prepareStatement(query);
 
             access.setInt(1, year);
             access.setInt(2, month);
             ResultSet result = access.executeQuery();            
-            access.close();
-
             int records = result.getMetaData().getColumnCount();
 	        for(int i=1; i<=records; i++)
 		        columns.addElement(result.getMetaData().getColumnName(i));
@@ -471,6 +475,8 @@ public class HMOReports {
 	        scrollPane.setPreferredSize(new Dimension(800, 800));
 
             
+            access.close();
+
 	        return scrollPane;
 
         } catch (ClassNotFoundException e) {
@@ -498,18 +504,20 @@ public class HMOReports {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connect = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPass());
-            String query = "SELECT " + "AVG(dw.salary), " + "ds.name" +
-                           "FROM doctors d JOIN doctorworkinfo dw ON d.doctorID = dw.doctorID" +
-                           "JOIN doctorspecializations ds ON d.doctorID = ds.doctorID" +
-                           "WHERE YEAR(c.consultationDate) = ?" +
-                           "GROUP BY YEAR(c.consultationDate);";
+            String query = "SELECT " + "AVG(dw.salary) AS average_salary, ds.name, ds.field " +
+                           "FROM doctors d " + 
+                           "JOIN doctorWorkInfo dw ON d.doctorID = dw.doctorID " +
+                           "JOIN doctorSpecializations ds ON d.doctorID = ds.doctorID " +
+                           "JOIN consultations c ON d.doctorID = c.doctorID " + 
+                           "WHERE YEAR(c.consultationDate) = ? " +
+                           "GROUP BY ds.name, ds.field  " +
+                           "ORDER BY ds.name, average_salary DESC; ";
 
             PreparedStatement access = connect.prepareStatement(query);
 
             access.setInt(1, year);
             ResultSet result = access.executeQuery();            
             
-            access.close();
 
 
             int records = result.getMetaData().getColumnCount();
@@ -531,6 +539,8 @@ public class HMOReports {
 	        scrollPane.setPreferredSize(new Dimension(800, 800));
 
             
+            access.close();
+
 	        return scrollPane;
 
         } catch (ClassNotFoundException e) {
