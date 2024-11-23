@@ -169,10 +169,20 @@ public class Controller{
 			view.refresh();
 			view.patientMenuConsultDoctor(transactions.availableDoctors(LocalDateTime.parse(view.getText1(), mdyhm), LocalDateTime.parse(view.getText2(), mdyhm), transactions.getRecordAttribute("complaints", "recommendedSpecialization", "complaintDescription", view.getText3())));
 			view.setVisible();
+			view.setText5(view.getText1());
+			view.setText6(view.getText2());
+			view.setText7(view.getText3());
 			} else {
 			    view.setResult1("No available doctors");
 			}
 			break;
+		    case 1021:
+			if(transactions.isDoctorAvailable(LocalDateTime.parse(view.getText5(), mdyhm), LocalDateTime.parse(view.getText6(), mdyhm), view.getText7(), Integer.parseInt(view.getText1()))) {
+			    transactions.bookAppointment(view.getID(), Integer.parseInt(view.getText1()), Timestamp.valueOf(LocalDateTime.parse(view.getText5(), mdyhm)), Timestamp.valueOf(LocalDateTime.parse(view.getText6(), mdyhm)));
+			    break;
+			} else {
+			    view.setResult1("Doctor unavailable");
+			}
 		    case 2100:
 			if (view.isButtonSelected(view.getRadio1())) {
 			    gender = "M";
